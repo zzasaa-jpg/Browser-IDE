@@ -1,0 +1,10 @@
+.file_or_folder_name
+{
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	cursor: pointer;
+	font-size: 12px;
+	margin: 5px;
+	overflow-wrap: anywhere;
+}
