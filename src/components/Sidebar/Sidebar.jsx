@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./Sidebar.css";
 import { Sidebar_bottom_section } from "./Sidebar_Components/Sidebar_bottom_section";
 import { Sidebar_Icons } from "./Sidebar_Components/Sidebar_Icons";
@@ -6,11 +7,12 @@ import { Sidebar_top_btns_and_title_parent } from "./Sidebar_Components/Sidebar_
 export default function Sidebar({ openFolder, files, loading, currentDir, buildTree, setFiles, createFolder, createFile }) {
 	const hasFiles = files.length > 0;
 	console.log(files, hasFiles);
+	const [activeTab, setActiveTab] = useState("explorer");
 	return (
 		<>
 			<div className="Sidebar">
 				<div className="Sidebar_top_section">
-					<Sidebar_Icons openFolder={openFolder} />
+					<Sidebar_Icons openFolder={openFolder} activeTab={activeTab} setActiveTab={setActiveTab} />
 					<Sidebar_top_btns_and_title_parent
 						currentDir={currentDir}
 						createFolder={createFolder}

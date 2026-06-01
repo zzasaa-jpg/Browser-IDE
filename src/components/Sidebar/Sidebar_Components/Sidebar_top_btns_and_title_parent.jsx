@@ -5,7 +5,7 @@ import { resize_sidebar } from "../Sidebar_Utilities/Handle_resize_file_explorer
 
 export function Sidebar_top_btns_and_title_parent({ currentDir, createFolder, createFile, loading, buildTree, setFiles, files }) {
     return (
-        <>
+        <div className="Sidebar_top_btns_and_ResizeHandle_parent_div">
             <div className="Sidebar_top_btns_and_title_parent_div">
                 <div className="Sidebar_top_btns_and_title_section">
                     <div className="Title_of_project_div">
@@ -48,6 +48,6 @@ export function Sidebar_top_btns_and_title_parent({ currentDir, createFolder, cr
                 className="ResizeHandle"
                 onPointerMove={resize_sidebar}
             ></div>
-        </>
+        </div>
     );
 };
