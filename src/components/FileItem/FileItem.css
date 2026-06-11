@@ -1,5 +1,4 @@
-.file_or_folder_name
-{
+.file_or_folder_name {
 	display: flex;
 	align-items: center;
 	gap: 8px;
@@ -7,4 +6,16 @@
 	font-size: 12px;
 	margin: 5px;
 	overflow-wrap: anywhere;
+}
+
+.file_or_folder_name:hover {
+	background: #25252627;
+}
+
+.children_container {
+	padding-left: 20px;
+}
+
+.file_name_text {
+	word-break: break-word;
 }
