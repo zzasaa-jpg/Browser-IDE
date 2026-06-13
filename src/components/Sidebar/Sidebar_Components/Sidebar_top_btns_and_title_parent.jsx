@@ -26,9 +26,11 @@ export function Sidebar_top_btns_and_title_parent({ currentDir, createFolder, cr
                     </div>
                 </div>
                 {loading ? (
-                    <h4>Loading...</h4>
+                    <div className="no_folder_mes_div">
+                        <h4 className="h4_tag">Loading...</h4>
+                    </div>
                 ) : files.length > 0 ? (
-                    <>
+                    <div className="no_folder_mes_div">
                         <div className="no_folder_mes">
                             {files.map((file) => (
                                 <FileItem
@@ -37,10 +39,12 @@ export function Sidebar_top_btns_and_title_parent({ currentDir, createFolder, cr
                                 />
                             ))}
                         </div>
-                    </>
+                    </div>
                 ) : (
-                    <div className="no_folder_mes">
-                        <h4>No Folder Selected!</h4>
+                    <div className="no_folder_mes_div">
+                        <div className="no_folder_mes">
+                            <h4 className="h4_tag">No Folder Selected!</h4>
+                        </div>
                     </div>
                 )}
             </div>

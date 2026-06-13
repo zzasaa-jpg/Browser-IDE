@@ -15,17 +15,22 @@ export default function FileManager() {
   } = useFiles([]);
 
   return (
-    <div>
-      <Sidebar
-        openFolder={openFolder}
-        files={files}
-        loading={loading}
-        currentDir={currentDir}
-        createFolder={createFolder}
-        createFile={createFile}
-        buildTree={buildTree}
-        setFiles={setFiles}
-      />
+    <div className="IDE_Parent_div">
+      <div className="class_06">
+        <Sidebar
+          openFolder={openFolder}
+          files={files}
+          loading={loading}
+          currentDir={currentDir}
+          createFolder={createFolder}
+          createFile={createFile}
+          buildTree={buildTree}
+          setFiles={setFiles}
+        />
+      </div>
+      <div className="Editor_Container">
+        Hello world from react
+      </div>
     </div>
   );
 }

@@ -10,9 +10,15 @@ export default function Sidebar({ openFolder, files, loading, currentDir, buildT
 	const [activeTab, setActiveTab] = useState("explorer");
 	return (
 		<>
-			<div className="Sidebar">
-				<div className="Sidebar_top_section">
-					<Sidebar_Icons openFolder={openFolder} activeTab={activeTab} setActiveTab={setActiveTab} />
+			<aside className="Sidebar">
+				<div className="Sidebar_left_div">
+					<Sidebar_Icons
+						openFolder={openFolder}
+						activeTab={activeTab}
+						setActiveTab={setActiveTab}
+					/>
+				</div>
+				<div className="Sidebar_right_div">
 					<Sidebar_top_btns_and_title_parent
 						currentDir={currentDir}
 						createFolder={createFolder}
@@ -22,9 +28,9 @@ export default function Sidebar({ openFolder, files, loading, currentDir, buildT
 						setFiles={setFiles}
 						files={files}
 					/>
+					<Sidebar_bottom_section />
 				</div>
-				<Sidebar_bottom_section />
-			</div >
+			</aside>
 		</>
 	);
 }
