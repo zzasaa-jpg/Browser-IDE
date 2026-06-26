@@ -1,16 +1,28 @@
-# React + Vite
+# Browser IDE v0.0.1
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## What is done?
+Git commit hash | Git commit                                                    |
+----------------|---------------------------------------------------------------|
+  **5197bfe** (**Latest**)   | Refactor: improve sidebar layout structure and global styling.|
+  **508ca74**   | feat: add recursive folder tree rendering.                    |
+  **a088f31**   | feat: implement active sidebar navigation.                    |
+  **ff30cfc**   | Add MIT License to the project.                               |
+  **b437a78**   | feat(browser-ide): implement dynamic file explorer system.    |
 
-Currently, two official plugins are available:
+## IDE v1
+- Create, Read, Update, Delete file operations(Edit the file).
+- Dynamic folder and file rendering(Pick the file).
+- Support to general file formats.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## File formats
+File format name  | Status  | Behavior                    |
+------------------|---------|-----------------------------|
+.img              | pending | Open and edit as plain text |
+.txt              | pending | Open and edit as plain text |
+.mp4              | pending | Open and edit as plain text |
+.mp3              | pending | Open and edit as plain text |
+.pdf              | pending | Open and edit as plain text |
+.csv              | pending | Open and edit as plain text |
+.html             | pending | Open and edit as plain text |
+.md               | pending | Open and edit as plain text |
+**More file formats in future...**
