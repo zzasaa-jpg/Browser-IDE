@@ -32,9 +32,9 @@ export function Sidebar_top_btns_and_title_parent({ currentDir, createFolder, cr
                 ) : files.length > 0 ? (
                     <div className="no_folder_mes_div">
                         <div className="no_folder_mes">
-                            {files.map((file) => (
+                            {files.map((file, idx) => (
                                 <FileItem
-                                    key={file.name}
+                                    key={idx}
                                     file={file}
                                 />
                             ))}

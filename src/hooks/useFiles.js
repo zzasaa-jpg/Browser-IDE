@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { pickFolder, buildTree, createFolder, createFile } from "../services/filesystem";
+import { readDirectories } from "../services/filesystem";
+import { pickFolder, buildTree, createFolder, createFile } from "../services/browserProvider";
 
 export function useFiles() {
   const [currentDir, setCurrentDir] = useState(null);
@@ -9,12 +10,9 @@ export function useFiles() {
   const openFolder = async () => {
     setLoading(true);
     try {
-      const dir = await pickFolder();
-      setCurrentDir(dir);
-      const fileList = await buildTree(dir);
-      setFiles(fileList);
-    } catch (err) {
-      console.error(err);
+      const result = await readDirectories();
+      setCurrentDir(result.dirHandle);
+      setFiles(result.tree);
     } finally {
       setLoading(false);
     }
