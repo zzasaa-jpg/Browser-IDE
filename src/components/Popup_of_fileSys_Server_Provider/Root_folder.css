@@ -1,0 +1,36 @@
+label {
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 12px;
+}
+
+#Root_folder_input {
+    width: 450px;
+    background-color: transparent;
+    border: 1px dotted black;
+    font-size: 13px;
+    font-weight: 100;
+    border-radius: 5px;
+    padding: 5px;
+    outline: none;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.rootFolder_div {
+    border: 1px dotted black;
+    height: 100px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 50px black;
+}
+
+.rootFolder_div_btn {
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.rootFolder_error {
+    color: red;
+    font-size: 13px
+}

@@ -31,6 +31,31 @@ export function useFiles() {
     }
   };
 
+  const validateRootFolder = async (path) => {
+    setLoading(true);
+    SetError(null);
+
+    try {
+      const result = await readDirectories(path);
+
+      if (!result.success) {
+        SetError(result.message);
+        return false;
+      }
+
+      setCurrentDir(result.dirPath);
+      setFiles(result.tree);
+
+      return true;
+
+    } catch (err) {
+      SetError(err.message || "Something went wrong.");
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return {
     files,
     currentDir,
@@ -44,5 +69,6 @@ export function useFiles() {
     fallBackServer,
     setFallBackServer,
     error,
+    validateRootFolder,
   };
 }

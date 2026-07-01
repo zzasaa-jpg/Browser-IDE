@@ -2,6 +2,7 @@ import { useFiles } from "../hooks/useFiles";
 import Sidebar from "../components/Sidebar/Sidebar";
 import "./FileManager.css";
 import Popup from "../components/Popup_of_fileSys_Server_Provider/Popup";
+import { Root_folder } from "../components/Popup_of_fileSys_Server_Provider/Root_folder";
 
 export default function FileManager() {
   const {
@@ -17,6 +18,7 @@ export default function FileManager() {
     fallBackServer,
     setFallBackServer,
     error,
+    validateRootFolder,
   } = useFiles([]);
 
   return (
@@ -29,6 +31,7 @@ export default function FileManager() {
             setFallBackServer={setFallBackServer}
             openFolder={openFolder}
             error={error}
+            validateRootFolder={validateRootFolder}
           /> :
           <div className="IDE_Parent_div">
             <div className="class_06">
