@@ -1,6 +1,7 @@
 import { useFiles } from "../hooks/useFiles";
 import Sidebar from "../components/Sidebar/Sidebar";
 import "./FileManager.css";
+import Popup from "../components/Popup_of_fileSys_Server_Provider/Popup";
 
 export default function FileManager() {
   const {
@@ -8,29 +9,45 @@ export default function FileManager() {
     openFolder,
     loading,
     currentDir,
+    setCurrentDir,
     buildTree,
     createFolder,
     createFile,
-    setFiles
+    setFiles,
+    fallBackServer,
+    setFallBackServer,
+    error,
   } = useFiles([]);
 
   return (
-    <div className="IDE_Parent_div">
-      <div className="class_06">
-        <Sidebar
-          openFolder={openFolder}
-          files={files}
-          loading={loading}
-          currentDir={currentDir}
-          createFolder={createFolder}
-          createFile={createFile}
-          buildTree={buildTree}
-          setFiles={setFiles}
-        />
-      </div>
-      <div className="Editor_Container">
-        Hello world from react
-      </div>
-    </div>
+    <>
+      {
+        fallBackServer ?
+          <Popup
+            files={files}
+            currentDir={currentDir}
+            setFallBackServer={setFallBackServer}
+            openFolder={openFolder}
+            error={error}
+          /> :
+          <div className="IDE_Parent_div">
+            <div className="class_06">
+              <Sidebar
+                openFolder={openFolder}
+                files={files}
+                loading={loading}
+                currentDir={currentDir}
+                createFolder={createFolder}
+                createFile={createFile}
+                buildTree={buildTree}
+                setFiles={setFiles}
+              />
+            </div>
+            <div className="Editor_Container">
+              Hello world from react
+            </div>
+          </div>
+      }
+    </>
   );
 }

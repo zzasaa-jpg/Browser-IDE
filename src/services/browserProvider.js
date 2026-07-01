@@ -1,9 +1,11 @@
-export async function read_Directories() {
+export async function read_Directories(path) {
     const dirHandle = await pickFolder();
     const tree = await buildTree(dirHandle);
     return {
+        success: true,
         dirHandle,
-        tree
+        tree,
+        fall_back_server: false,
     };
 }
 
@@ -33,7 +35,6 @@ export async function buildTree(dirHandle) {
             });
         }
     }
-    // console.log(children);
     return children;
 }
 

@@ -6,7 +6,7 @@ export async function readDirectories(path) {
 	const supported = SupportsFileSystemAPI();
 	console.log("SupportsFileSystemAPI() =", supported);
 	if (supported) {
-		return BrowserProvider.read_Directories();
+		return BrowserProvider.read_Directories(path);
 	}
 	return ServerProvider.read_Directories(path);
 }
