@@ -185,6 +185,7 @@
 
 .no_folder_mes {
 	width: -webkit-fill-available;
+	text-align: center;
 }
 
 .no_folder_mes_div {
@@ -202,4 +203,16 @@
 
 .h4_tag {
 	margin: 10px;
+}
+
+.open_Folder_btn {
+	background-color: #0A66C1;
+	padding: 8px;
+	outline: none;
+	font-family: inherit;
+	border: none;
+	border-radius: 5px;
+	color: white;
+	font-size: 12px;
+	cursor: pointer;
 }

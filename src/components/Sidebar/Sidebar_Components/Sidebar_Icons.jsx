@@ -1,9 +1,9 @@
-export function Sidebar_Icons({ openFolder, activeTab, setActiveTab }) {
+export function Sidebar_Icons({ activeTab, setActiveTab, setIsVisible, isVisible }) {
     const handleClick = (tab) => {
         setActiveTab(tab);
 
         if (tab === "explorer") {
-            openFolder();
+            setIsVisible(!isVisible);
         }
     };
 

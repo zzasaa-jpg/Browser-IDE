@@ -117,8 +117,8 @@
 }
 
 .popup_folder_files_div:hover {
-    background: #000000c9;
-    color: #fff;
+    outline: auto;
+    outline-color: #000000;
     transition: all .15s ease;
 }
 

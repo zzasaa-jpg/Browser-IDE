@@ -8,17 +8,19 @@ export default function Sidebar({ openFolder, files, loading, currentDir, buildT
 	const hasFiles = files.length > 0;
 	console.log(files, hasFiles);
 	const [activeTab, setActiveTab] = useState("explorer");
+	const [isVisible, setIsVisible] = useState(true);
 	return (
 		<>
-			<aside className="Sidebar">
+			<aside className="Sidebar" style={{width: isVisible ? '270px' : 'auto'}}>
 				<div className="Sidebar_left_div">
 					<Sidebar_Icons
-						openFolder={openFolder}
 						activeTab={activeTab}
 						setActiveTab={setActiveTab}
+						setIsVisible={setIsVisible}
+						isVisible={isVisible}
 					/>
 				</div>
-				<div className="Sidebar_right_div">
+				<div className="Sidebar_right_div" style={{display: isVisible ? 'flex' : 'none'}}>
 					<Sidebar_top_btns_and_title_parent
 						currentDir={currentDir}
 						createFolder={createFolder}
@@ -27,6 +29,7 @@ export default function Sidebar({ openFolder, files, loading, currentDir, buildT
 						buildTree={buildTree}
 						setFiles={setFiles}
 						files={files}
+						openFolder={openFolder}
 					/>
 					<Sidebar_bottom_section />
 				</div>

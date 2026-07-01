@@ -3,7 +3,7 @@ import { handleRefresh } from "../../Sidebar/Sidebar_Utilities/Handle_refresh";
 import { handle_New_Folder_or_File } from "../../Sidebar/Sidebar_Utilities/Handle_new_folder_or_file";
 import { resize_sidebar } from "../Sidebar_Utilities/Handle_resize_file_explorer";
 
-export function Sidebar_top_btns_and_title_parent({ currentDir, createFolder, createFile, loading, buildTree, setFiles, files }) {
+export function Sidebar_top_btns_and_title_parent({ currentDir, createFolder, createFile, loading, buildTree, setFiles, files, openFolder }) {
     return (
         <div className="Sidebar_top_btns_and_ResizeHandle_parent_div">
             <div className="Sidebar_top_btns_and_title_parent_div">
@@ -44,6 +44,7 @@ export function Sidebar_top_btns_and_title_parent({ currentDir, createFolder, cr
                     <div className="no_folder_mes_div">
                         <div className="no_folder_mes">
                             <h4 className="h4_tag">No Folder Selected!</h4>
+                            <button className="open_Folder_btn" onClick={()=> openFolder()}>Open Folder</button>
                         </div>
                     </div>
                 )}
