@@ -6,7 +6,7 @@ import { Root_folder } from "./Root_folder";
 
 export default function Popup({ files, currentDir, setFallBackServer, openFolder, error, validateRootFolder }) {
     const [ffName, setFfName] = useState(currentDir);
-    const [selectType, setSelectType] = useState("both");
+    const [selectType, setSelectType] = useState("file&folder");
     const [rootFolder, setRootFolder] = useState(true);
     const handleSelect = async () => {
         const success = await openFolder(ffName);
@@ -17,7 +17,7 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
 
     const filtered_files = sortFilesAndFolder(files)
         .filter((file) => {
-            if (selectType == "both") return true;
+            if (selectType == "file&folder") return true;
             return file.type == selectType;
         })
     return (
@@ -35,8 +35,8 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                             <div className="top_div">
                                 <ul className="popup_grid">
                                     {filtered_files.length == 0 ? (
-                                        <div className="popup_no_folder_files_div">
-                                            <img src={selectType == "directory" ? "src/assets/folder-outline.svg" : "src/assets/document-text-outline.svg"} alt="img" width={80} height={80} />
+                                        <div className="popup_no_folder_files_div" style={{ cursor: "not-allowed" }}>
+                                            <img src={"src/assets/warning-outline.svg"} alt="img" width={80} height={80} />
                                             <span> No {selectType} found.</span>
                                         </div>
                                     ) : (
@@ -60,7 +60,7 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                                     <select className="select_tag" value={selectType} onChange={(e) => setSelectType(e.target.value)}>
                                         <option value={"directory"}>Only Folder</option>
                                         <option value={"file"}>Only Files</option>
-                                        <option value={"both"}>Both Folder & Files</option>
+                                        <option value={"file&folder"}>Both Folder & Files</option>
                                     </select>
                                 </div>
                                 {error &&

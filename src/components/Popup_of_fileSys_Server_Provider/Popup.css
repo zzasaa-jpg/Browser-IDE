@@ -105,7 +105,8 @@
     gap: 20px;
 }
 
-.popup_folder_files_div {
+.popup_folder_files_div,
+.popup_no_folder_files_div {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -120,12 +121,6 @@
     outline: auto;
     outline-color: #000000;
     transition: all .15s ease;
-}
-
-.popup_no_folder_files_div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .popup_error {
