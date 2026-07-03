@@ -5,9 +5,11 @@ import { readDirectories } from "../../services/filesystem";
 import { Root_folder } from "./Root_folder";
 
 export default function Popup({ files, currentDir, setFallBackServer, openFolder, error, validateRootFolder }) {
-    const [ffName, setFfName] = useState(currentDir);
+    const [ffName, setFfName] = useState("");
     const [selectType, setSelectType] = useState("file&folder");
     const [rootFolder, setRootFolder] = useState(true);
+    const [isSelectBtnDisbale, setIsSelectBtnDisable] = useState(true);
+
     const handleSelect = async () => {
         const success = await openFolder(ffName);
         if (success) {
@@ -20,6 +22,18 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
             if (selectType == "file&folder") return true;
             return file.type == selectType;
         })
+
+    function handle_popup_input(e) {
+        const inputValue = e.target.value.replace(/\s+/g, '');
+        setFfName(inputValue);
+        inputValue.length == 0 ? setIsSelectBtnDisable(true) : setIsSelectBtnDisable(false);
+    }
+
+    function handle_popup_folder_files_states_event(file) {
+        setFfName(`${currentDir}/${file.name}`);
+        setIsSelectBtnDisable(false);
+    }
+
     return (
         <>
             <div className="popup_container">
@@ -30,6 +44,7 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                             setRootFolder={setRootFolder}
                             setFallBackServer={setFallBackServer}
                             validateRootFolder={validateRootFolder}
+                            SetError={SetError}
                         /> :
                         <div className="pop_box">
                             <div className="top_div">
@@ -41,7 +56,7 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                                         </div>
                                     ) : (
                                         filtered_files.map((file, idx) =>
-                                            <div className="popup_folder_files_div" key={idx} onClick={() => setFfName(`${currentDir}/${file.name}`)}>
+                                            <div className="popup_folder_files_div" key={idx} onClick={() => handle_popup_folder_files_states_event(file)}>
                                                 <img src={file.type == "directory" ? "src/assets/folder-outline.svg" : "src/assets/document-text-outline.svg"} alt="img" width={80} height={80} />
                                                 <span className="file_list_tag">{file.name}</span>
                                             </div>
@@ -53,9 +68,9 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                             <div className="bottom_div">
                                 <h4 className="currentDir">Root folder: {currentDir}</h4>
                                 <div className="input_select_tag_div">
-                                    <input type="text" name="file_path"
-                                        id="file_path" value={ffName}
-                                        onChange={(e) => setFfName(e.target.value.replace(/\s+/g, ''))}
+                                    <input type="text" name="popup_input"
+                                        id="popup_input" value={ffName}
+                                        onChange={(e) => handle_popup_input(e)}
                                     />
                                     <select className="select_tag" value={selectType} onChange={(e) => setSelectType(e.target.value)}>
                                         <option value={"directory"}>Only Folder</option>
@@ -67,7 +82,7 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                                     <span className="popup_error">{error}</span>
                                 }
                                 <div className="popup_btns_div">
-                                    <button className="select_btn" onClick={handleSelect}>Select</button>
+                                    <button className="select_btn" disabled={isSelectBtnDisbale} onClick={handleSelect} style={{ cursor: isSelectBtnDisbale ? "not-allowed" : "pointer" }}>Select</button>
                                     <button className="cancel_btn" onClick={() => setRootFolder(true)}>Cancel</button>
                                 </div>
                             </div>
