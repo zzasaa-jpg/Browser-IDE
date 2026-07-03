@@ -1,4 +1,4 @@
-export async function read_Directories(path) {
+export async function read_Directories() {
     const dirHandle = await pickFolder();
     const tree = await buildTree(dirHandle);
     return {

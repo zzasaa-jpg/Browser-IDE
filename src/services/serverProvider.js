@@ -5,7 +5,8 @@ export async function read_Directories(path_) {
         const response = await axios.get("http://localhost:3000/read_directories", {
             method: "GET",
             params: {
-                path: path_ != undefined ? path_ : "C://Users/zzsdr/Desktop/my-react-app"
+                path: path_,
+                // != undefined ? path_ : "C://Users/zzsdr/Desktop/my-react-app"
             }
         });
         if (!response.data.success) {

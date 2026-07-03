@@ -1,12 +1,10 @@
 import { SupportsFileSystemAPI } from "../Utilities/SupportsFileSystemApi.js";
-import * as BrowserProvider from "./browserProvider.js";
-import * as ServerProvider from "./serverProvider.js";
 
-export async function readDirectories(path) {
+export async function CheckFileSystemAPI(path) {
 	const supported = SupportsFileSystemAPI();
 	console.log("SupportsFileSystemAPI() =", supported);
 	if (supported) {
-		return BrowserProvider.read_Directories(path);
+		return 49;
 	}
-	return ServerProvider.read_Directories(path);
+	return 48;
 }

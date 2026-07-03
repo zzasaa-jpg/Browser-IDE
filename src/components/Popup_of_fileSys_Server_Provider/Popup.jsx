@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./Popup.css";
 import { sortFilesAndFolder } from "../../Utilities/SortFilesAndFolder";
-import { readDirectories } from "../../services/filesystem";
 import { Root_folder } from "./Root_folder";
 
 export default function Popup({ files, currentDir, setFallBackServer, openFolder, error, validateRootFolder }) {
@@ -11,7 +10,7 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
     const [isSelectBtnDisbale, setIsSelectBtnDisable] = useState(true);
 
     const handleSelect = async () => {
-        const success = await openFolder(ffName);
+        const success = await validateRootFolder(ffName);
         if (success) {
             setFallBackServer(false);
         }
@@ -31,7 +30,15 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
 
     function handle_popup_folder_files_states_event(file) {
         setFfName(`${currentDir}/${file.name}`);
+        console.log(ffName)
         setIsSelectBtnDisable(false);
+    }
+
+    function resetStates() {
+        setFfName("");
+        setSelectType("file&folder")
+        setIsSelectBtnDisable(true);
+        setRootFolder(true)
     }
 
     return (
@@ -44,7 +51,6 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                             setRootFolder={setRootFolder}
                             setFallBackServer={setFallBackServer}
                             validateRootFolder={validateRootFolder}
-                            SetError={SetError}
                         /> :
                         <div className="pop_box">
                             <div className="top_div">
@@ -83,7 +89,7 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                                 }
                                 <div className="popup_btns_div">
                                     <button className="select_btn" disabled={isSelectBtnDisbale} onClick={handleSelect} style={{ cursor: isSelectBtnDisbale ? "not-allowed" : "pointer" }}>Select</button>
-                                    <button className="cancel_btn" onClick={() => setRootFolder(true)}>Cancel</button>
+                                    <button className="cancel_btn" onClick={() => resetStates()}>Cancel</button>
                                 </div>
                             </div>
                         </div>

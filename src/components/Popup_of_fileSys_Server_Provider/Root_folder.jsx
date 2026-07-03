@@ -19,6 +19,12 @@ export function Root_folder({ error, setRootFolder, setFallBackServer, validateR
         value.length === 0 ? setIsSelectBtnDisable(true) : setIsSelectBtnDisable(false);
     }
 
+    function resetStates() {
+        setRootPath(null);
+        setIsSelectBtnDisable(false);
+        setFallBackServer(false);
+    }
+
     return (
         <>
             <div className="rootFolder_div">
@@ -27,11 +33,11 @@ export function Root_folder({ error, setRootFolder, setFallBackServer, validateR
                     <input type="text" id="Root_folder_input" onChange={(e) => Root_folder_input_handle(e)} />
                 </div>
                 {error &&
-                    <span className="rootFolder_error">path is not exists</span>
+                    <span className="rootFolder_error">{error}</span>
                 }
                 <div className="rootFolder_div_btn">
                     <button className="select_btn" disabled={isSelectBtnDisbale} onClick={handleSelect} style={{ cursor: isSelectBtnDisbale ? "not-allowed" : "pointer" }}>Select</button>
-                    <button className="cancel_btn" onClick={() => setFallBackServer(false)}>Cancel</button>
+                    <button className="cancel_btn" onClick={() => resetStates()}>Cancel</button>
                 </div>
             </div>
         </>
