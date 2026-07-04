@@ -1,6 +1,6 @@
 import { useActionState, useState } from "react";
 import "./Root_folder.css";
-export function Root_folder({ error, setRootFolder, setFallBackServer, validateRootFolder }) {
+export function Root_folder({ error, setRootFolder, setFallBackServer, validateRootFolder, setBreadCrumbPath }) {
     const [rootPath, setRootPath] = useState(null);
     const [isSelectBtnDisbale, setIsSelectBtnDisable] = useState(true);
 
@@ -16,6 +16,7 @@ export function Root_folder({ error, setRootFolder, setFallBackServer, validateR
     function Root_folder_input_handle(e) {
         const value = e.target.value.replace(/\s+/g, '');
         setRootPath(value);
+        setBreadCrumbPath(value);
         value.length === 0 ? setIsSelectBtnDisable(true) : setIsSelectBtnDisable(false);
     }
 

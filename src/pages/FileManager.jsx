@@ -19,6 +19,10 @@ export default function FileManager() {
     setFallBackServer,
     error,
     validateRootFolder,
+    undo, redo,
+    canUndo,
+    canRedo,
+    reset,
   } = useFiles([]);
 
   return (
@@ -32,6 +36,11 @@ export default function FileManager() {
             openFolder={openFolder}
             error={error}
             validateRootFolder={validateRootFolder}
+            undo={undo}
+            redo={redo}
+            canUndo={canUndo}
+            canRedo={canRedo}
+            reset={reset}
           /> :
           <div className="IDE_Parent_div">
             <div className="class_06">

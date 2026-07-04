@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CheckFileSystemAPI } from "../services/filesystem";
 import { pickFolder, buildTree, createFolder, createFile } from "../services/browserProvider";
 import * as BrowserProvider from "../services/browserProvider.js";
 import * as ServerProvider from "../services/serverProvider.js";
+import { useUndoRedo } from "./useUndoRedo.js";
 
 export function useFiles() {
   const [currentDir, setCurrentDir] = useState(null);
@@ -10,6 +11,20 @@ export function useFiles() {
   const [loading, setLoading] = useState(false);
   const [fallBackServer, setFallBackServer] = useState(false);
   const [error, SetError] = useState(null);
+  const {
+    state,
+    setNewState,
+    undo, redo,
+    canUndo,
+    canRedo,
+    reset
+  } = useUndoRedo(null);
+
+  useEffect(() => {
+    if (!state) return;
+    setCurrentDir(state.dirPath);
+    setFiles(state.tree || []);
+  }, [state]);
 
   const openFolder = async (path = currentDir) => {
     setLoading(true);
@@ -44,18 +59,13 @@ export function useFiles() {
 
     try {
       const result = await ServerProvider.read_Directories(path);
-
       if (!result.success) {
         SetError(result.message);
         return false;
       }
-
-      setCurrentDir(result.dirPath);
-      setFiles(result.tree);
-      setFallBackServer(result.fall_back_server)
-
+      console.log(result)
+      setNewState(result);
       return true;
-
     } catch (err) {
       SetError(err.message || "Something went wrong.");
       return false;
@@ -78,5 +88,9 @@ export function useFiles() {
     setFallBackServer,
     error,
     validateRootFolder,
+    undo, redo,
+    canUndo,
+    canRedo,
+    reset,
   };
 }

@@ -1,9 +1,17 @@
+import { sortFilesAndFolder } from "../../Utilities/SortFilesAndFolder";
 import "./FileItem.css";
 import { useState } from "react";
 
 export default function FileItem({ file }) {
 	const [open, setOpen] = useState(false);
 	const isFolder = file.type === "directory";
+	const childItems =
+		file?.type === "directory" && Array.isArray(file?.children?.children)
+			? file.children.children.filter(
+				child => typeof child.name === "string" && child.name.trim() !== ""
+			)
+			: [];
+	const sort = sortFilesAndFolder(childItems);
 
 	return (
 		<>
@@ -20,7 +28,7 @@ export default function FileItem({ file }) {
 			<div className="children_container">
 				{
 					open &&
-					file.children?.map(child => (
+					sort.map(child => (
 						<div key={child.name}>
 							<FileItem file={child} />
 						</div>
