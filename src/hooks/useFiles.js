@@ -92,5 +92,6 @@ export function useFiles() {
     canUndo,
     canRedo,
     reset,
+    setLoading,
   };
 }

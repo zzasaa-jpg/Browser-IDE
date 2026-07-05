@@ -1,11 +1,15 @@
 import { useActionState, useState } from "react";
 import "./Root_folder.css";
-export function Root_folder({ error, setRootFolder, setFallBackServer, validateRootFolder, setBreadCrumbPath }) {
+import Loader from "../Loader/Loader";
+
+export function Root_folder({ error, setRootFolder, setFallBackServer, validateRootFolder, setBreadCrumbPath, loading, setLoading }) {
     const [rootPath, setRootPath] = useState(null);
     const [isSelectBtnDisbale, setIsSelectBtnDisable] = useState(true);
+    const [isCancelBtnDisable, setIsCancelBtnDisable] = useState(false);
 
     async function handleSelect() {
-
+        setIsSelectBtnDisable(true);
+        setIsCancelBtnDisable(true);
         const success = await validateRootFolder(rootPath);
 
         if (success) {
@@ -37,8 +41,12 @@ export function Root_folder({ error, setRootFolder, setFallBackServer, validateR
                     <span className="rootFolder_error">{error}</span>
                 }
                 <div className="rootFolder_div_btn">
-                    <button className="select_btn" disabled={isSelectBtnDisbale} onClick={handleSelect} style={{ cursor: isSelectBtnDisbale ? "not-allowed" : "pointer" }}>Select</button>
-                    <button className="cancel_btn" onClick={() => resetStates()}>Cancel</button>
+                    <button className="select_btn" disabled={isSelectBtnDisbale} onClick={handleSelect} style={{ cursor: isSelectBtnDisbale ? "not-allowed" : "pointer", padding: loading ? "0px" : "6px" }}>{
+                        loading ?
+                            <Loader H={21} W={21} /> :
+                            "Select"}
+                    </button>
+                    <button className="cancel_btn" disabled={isCancelBtnDisable} onClick={() => resetStates()} style={{ cursor: isCancelBtnDisable ? "not-allowed" : "pointer", }}>Cancel</button>
                 </div>
             </div>
         </>

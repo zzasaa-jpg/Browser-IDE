@@ -75,6 +75,9 @@
     outline: none;
     font-weight: 100;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .input_select_tag_div {

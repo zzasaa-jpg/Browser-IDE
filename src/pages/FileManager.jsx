@@ -23,6 +23,7 @@ export default function FileManager() {
     canUndo,
     canRedo,
     reset,
+    setLoading,
   } = useFiles([]);
 
   return (
@@ -41,6 +42,8 @@ export default function FileManager() {
             canUndo={canUndo}
             canRedo={canRedo}
             reset={reset}
+            loading={loading}
+            setLoading={setLoading}
           /> :
           <div className="IDE_Parent_div">
             <div className="class_06">
