@@ -3,7 +3,25 @@ import "../Popup_of_fileSys_Components/Styles/Root_folder.css";
 import Loader from "../../Loader/Loader";
 import { handle_Validate_RootFolder, resetStates_of_root_folder, Root_folder_input_handle } from "../Root_folder_Utilities/Root_folder_Utilities";
 
-export function Root_folder({ error, setRootFolder, setFallBackServer, validateRootFolder, setBreadCrumbPath, loading, setLoading, isInputFieldDisable, setIsInputFieldDisable }) {
+export function Root_folder({ values, setters, action }) {
+    const {
+        error,
+        loading,
+        isInputFieldDisable
+    } = values;
+
+    const {
+        setRootFolder,
+        setFallBackServer,
+        setBreadCrumbPath,
+        setLoading,
+        setIsInputFieldDisable
+    } = setters;
+
+    const {
+        validateRootFolder
+    } = action;
+
     const [rootPath, setRootPath] = useState(null);
     const [isSelectBtnDisbale, setIsSelectBtnDisable] = useState(true);
     const [isCancelBtnDisable, setIsCancelBtnDisable] = useState(false);

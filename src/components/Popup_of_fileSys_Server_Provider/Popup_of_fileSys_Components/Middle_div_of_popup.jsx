@@ -1,7 +1,23 @@
 import Loader from "../../Loader/Loader";
-import {Popup_inside_fetch_ff, Handle_popup_folder_files_states_event} from "../Popup_of_fileSys_Utilities/Popup_of_fileSys_Utilities";
+import { Popup_inside_fetch_ff, Handle_popup_folder_files_states_event } from "../Popup_of_fileSys_Utilities/Popup_of_fileSys_Utilities";
 
-export function Middle_div_of_popup({ loading, filtered_files, selectType, currentDir, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setFfName }) {
+export function Middle_div_of_popup({ values, setters, action }) {
+    const {
+        loading,
+        filtered_files,
+        selectType,
+        currentDir
+    } = values;
+    const {
+        setIsSelectBtnDisable,
+        setIsCancelBtnDisable,
+        setIsInputFieldDisable,
+        setFfName
+    } = setters;
+    const {
+        validateRootFolder
+    } = action;
+
     return (
         <div className="Middle_div_of_popup" style={{
             "display": loading ? "flex" : "block",

@@ -1,7 +1,31 @@
 import Loader from "../../Loader/Loader";
-import {HandleSelect, Handle_popup_input, ResetStates_of_popup} from "../Popup_of_fileSys_Utilities/Popup_of_fileSys_Utilities";
+import { HandleSelect, Handle_popup_input, ResetStates_of_popup } from "../Popup_of_fileSys_Utilities/Popup_of_fileSys_Utilities";
 
-export function Bottom_div_of_popup({ ffName, isInputFieldDisable, selectType, setSelectType, error, isSelectBtnDisbale, isCancelBtnDisable, loading, setFfName, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setFallBackServer, setRootFolder, reset }) {
+export function Bottom_div_of_popup({ values, setters, actions }) {
+    const {
+        ffName,
+        isInputFieldDisable,
+        selectType,
+        error,
+        isSelectBtnDisable,
+        isCancelBtnDisable,
+        loading
+    } = values;
+
+    const {
+        setFfName,
+        setIsSelectBtnDisable,
+        setIsCancelBtnDisable,
+        setIsInputFieldDisable,
+        setFallBackServer,
+        setRootFolder,
+        setSelectType
+    } = setters;
+    const {
+        validateRootFolder,
+        reset
+    } = actions;
+
     return (
         <div className="bottom_div">
             <h4 className="currentDir">Root folder: {ffName}</h4>
@@ -22,7 +46,7 @@ export function Bottom_div_of_popup({ ffName, isInputFieldDisable, selectType, s
                 <span className="popup_error">{error}</span>
             }
             <div className="popup_btns_div">
-                <button className="select_btn" disabled={isSelectBtnDisbale} onClick={() => HandleSelect(setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, ffName, setFallBackServer)} style={{ cursor: isSelectBtnDisbale ? "not-allowed" : "pointer", padding: loading ? "0px" : "6px" }}>{
+                <button className="select_btn" disabled={isSelectBtnDisable} onClick={() => HandleSelect(setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, ffName, setFallBackServer)} style={{ cursor: isSelectBtnDisable ? "not-allowed" : "pointer", padding: loading ? "0px" : "6px" }}>{
                     loading ?
                         <Loader H={21} W={21} /> :
                         "Select"}</button>

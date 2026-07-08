@@ -10,7 +10,7 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
     const [ffName, setFfName] = useState("");
     const [selectType, setSelectType] = useState("file&folder");
     const [rootFolder, setRootFolder] = useState(true);
-    const [isSelectBtnDisbale, setIsSelectBtnDisable] = useState(true);
+    const [isSelectBtnDisable, setIsSelectBtnDisable] = useState(true);
     const [isCancelBtnDisable, setIsCancelBtnDisable] = useState(false);
     const [forward_Btn, setForwardBtn] = useState(false);
     const [backward_Btn, setBackwardBtn] = useState(false);
@@ -37,63 +37,88 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                 {
                     rootFolder ?
                         <Root_folder
-                            error={error}
-                            setRootFolder={setRootFolder}
-                            setFallBackServer={setFallBackServer}
-                            validateRootFolder={validateRootFolder}
-                            setBreadCrumbPath={setBreadCrumbPath}
-                            loading={loading}
-                            setLoading={setLoading}
-                            isInputFieldDisable={isInputFieldDisable}
-                            setIsInputFieldDisable={setIsInputFieldDisable}
+                            values={{
+                                error,
+                                loading,
+                                isInputFieldDisable
+                            }}
+                            setters={{
+                                setRootFolder,
+                                setFallBackServer,
+                                setBreadCrumbPath,
+                                setLoading,
+                                setIsInputFieldDisable
+                            }}
+                            action={{
+                                validateRootFolder
+                            }}
                         /> :
                         <div className="pop_box">
                             <Top_bar_of_popup
-                                setForwardBtn={setForwardBtn}
-                                forward_Btn={forward_Btn}
-                                undo={undo}
-                                canUndo={canUndo}
-                                setBackwardBtn={setBackwardBtn}
-                                backward_Btn={backward_Btn}
-                                redo={redo}
-                                canRedo={canRedo}
-                                sliptPaths={sliptPaths}
-                                files={files}
-                                setIsSelectBtnDisable={setIsSelectBtnDisable}
-                                setIsCancelBtnDisable={setIsCancelBtnDisable}
-                                setIsInputFieldDisable={setIsInputFieldDisable}
-                                validateRootFolder={validateRootFolder}
-                                setBreadCrumbPath={setBreadCrumbPath}
-                                setFfName={setFfName}
+                                values={{
+                                    forward_Btn,
+                                    undo,
+                                    canUndo,
+                                    backward_Btn,
+                                    redo,
+                                    canRedo,
+                                    sliptPaths,
+                                    files
+                                }}
+
+                                setters={{
+                                    setForwardBtn,
+                                    setBackwardBtn,
+                                    setIsSelectBtnDisable,
+                                    setIsCancelBtnDisable,
+                                    setIsInputFieldDisable,
+                                    setBreadCrumbPath,
+                                    setFfName,
+                                }}
+                                action={{
+                                    validateRootFolder
+                                }}
                             />
                             <Middle_div_of_popup
-                                loading={loading}
-                                filtered_files={filtered_files}
-                                selectType={selectType}
-                                currentDir={currentDir}
-                                setIsSelectBtnDisable={setIsSelectBtnDisable}
-                                setIsCancelBtnDisable={setIsCancelBtnDisable}
-                                setIsInputFieldDisable={setIsInputFieldDisable}
-                                validateRootFolder={validateRootFolder}
-                                setFfName={setFfName}
+                                values={{
+                                    loading,
+                                    filtered_files,
+                                    selectType,
+                                    currentDir
+                                }}
+                                setters={{
+                                    setIsSelectBtnDisable,
+                                    setIsCancelBtnDisable,
+                                    setIsInputFieldDisable,
+                                    setFfName
+                                }}
+                                action={{
+                                    validateRootFolder
+                                }}
                             />
                             <Bottom_div_of_popup
-                                ffName={ffName}
-                                isInputFieldDisable={isInputFieldDisable}
-                                selectType={selectType}
-                                setSelectType={setSelectType}
-                                error={error}
-                                isSelectBtnDisbale={isSelectBtnDisbale}
-                                isCancelBtnDisable={isCancelBtnDisable}
-                                loading={loading}
-                                setFfName={setFfName}
-                                setIsSelectBtnDisable={setIsSelectBtnDisable}
-                                setIsCancelBtnDisable={setIsCancelBtnDisable}
-                                setIsInputFieldDisable={setIsInputFieldDisable}
-                                validateRootFolder={validateRootFolder}
-                                setFallBackServer={setFallBackServer}
-                                setRootFolder={setRootFolder}
-                                reset={reset}
+                                values={{
+                                    ffName,
+                                    isInputFieldDisable,
+                                    selectType,
+                                    error,
+                                    isSelectBtnDisable,
+                                    isCancelBtnDisable,
+                                    loading
+                                }}
+                                setters={{
+                                    setFfName,
+                                    setIsSelectBtnDisable,
+                                    setIsCancelBtnDisable,
+                                    setIsInputFieldDisable,
+                                    setFallBackServer,
+                                    setRootFolder,
+                                    setSelectType
+                                }}
+                                actions={{
+                                    validateRootFolder,
+                                    reset
+                                }}
                             />
                         </div>
                 }

@@ -1,7 +1,32 @@
 import React from "react";
-import {HandleBreadCrumbClick} from "../Popup_of_fileSys_Utilities/Popup_of_fileSys_Utilities";
+import { HandleBreadCrumbClick } from "../Popup_of_fileSys_Utilities/Popup_of_fileSys_Utilities";
 
-export function Top_bar_of_popup({ setForwardBtn, forward_Btn, undo, canUndo, setBackwardBtn, backward_Btn, redo, canRedo, sliptPaths, files,  setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setBreadCrumbPath, setFfName}){
+export function Top_bar_of_popup({ values, setters, action }) {
+    const {
+        forward_Btn,
+        undo,
+        canUndo,
+        backward_Btn,
+        redo,
+        canRedo,
+        sliptPaths,
+        files
+    } = values;
+
+    const {
+        setForwardBtn,
+        setBackwardBtn,
+        setIsSelectBtnDisable,
+        setIsCancelBtnDisable,
+        setIsInputFieldDisable,
+        setBreadCrumbPath,
+        setFfName
+    } = setters;
+
+    const {
+        validateRootFolder
+    } = action;
+
     return (
         <div className="top_bar_of_popup">
             <div className="forward_and_backward_btns">
