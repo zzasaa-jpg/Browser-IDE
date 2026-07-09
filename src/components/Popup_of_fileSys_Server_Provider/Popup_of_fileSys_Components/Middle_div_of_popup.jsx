@@ -1,30 +1,40 @@
+import { useEffect, useState } from "react";
 import Loader from "../../Loader/Loader";
 import { Popup_inside_fetch_ff, Handle_popup_folder_files_states_event } from "../Popup_of_fileSys_Utilities/Popup_of_fileSys_Utilities";
 
 export function Middle_div_of_popup({ values, setters, action }) {
     const {
         loading,
+        loading_01,
         filtered_files,
         selectType,
-        currentDir
+        currentDir,
+        error,
     } = values;
     const {
         setIsSelectBtnDisable,
         setIsCancelBtnDisable,
         setIsInputFieldDisable,
-        setFfName
+        setFfName,
+        setError,
+        setLoading_01,
     } = setters;
     const {
         validateRootFolder
     } = action;
 
+    useEffect(() => {
+        if (loading_01 || loading || error) return;
+        setIsSelectBtnDisable(filtered_files.length == 0);
+    }, [filtered_files, loading_01, loading, error]);
+
     return (
         <div className="Middle_div_of_popup" style={{
-            "display": loading ? "flex" : "block",
-            "justifyContent": loading ? "center" : "normal",
-            "alignItems": loading ? "center" : "normal"
+            "display": loading_01 ? "flex" : "block",
+            "justifyContent": loading_01 ? "center" : "normal",
+            "alignItems": loading_01 ? "center" : "normal"
         }}>
-            {loading ? <Loader H={50} W={50} /> :
+            {loading_01 ? <Loader H={50} W={50} /> :
                 <ul className="popup_grid">
                     {filtered_files.length == 0 ? (
                         <div className="popup_no_folder_files_div" style={{ cursor: "not-allowed" }}>
@@ -35,7 +45,7 @@ export function Middle_div_of_popup({ values, setters, action }) {
                         filtered_files.map((file, idx) =>
                             <div className="popup_folder_files_div" key={idx}
                                 onClick={() => Handle_popup_folder_files_states_event(file, setFfName, setIsSelectBtnDisable, currentDir)}
-                                onDoubleClick={() => Popup_inside_fetch_ff(`${currentDir}/${file.name}`, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder)}
+                                onDoubleClick={() => Popup_inside_fetch_ff(`${currentDir}/${file.name}`, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setError, setLoading_01)}
                             >
                                 <img src={file.type == "directory" ? "src/assets/folder-outline.svg" : "src/assets/document-text-outline.svg"} alt="img" width={80} height={80} />
                                 <span className="file_list_tag">{file.name}</span>

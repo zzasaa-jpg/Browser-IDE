@@ -6,7 +6,7 @@ import { Top_bar_of_popup } from "./Popup_of_fileSys_Components/Top_bar_of_popup
 import { Middle_div_of_popup } from "./Popup_of_fileSys_Components/Middle_div_of_popup";
 import { Bottom_div_of_popup } from "./Popup_of_fileSys_Components/bottom_div_of_popup";
 
-export default function Popup({ files, currentDir, setFallBackServer, openFolder, error, validateRootFolder, undo, redo, canUndo, canRedo, reset, loading, setLoading }) {
+export default function Popup({ files, currentDir, setFallBackServer, openFolder, error, validateRootFolder, undo, redo, canUndo, canRedo, reset, loading, setLoading, setError }) {
     const [ffName, setFfName] = useState("");
     const [selectType, setSelectType] = useState("file&folder");
     const [rootFolder, setRootFolder] = useState(true);
@@ -16,6 +16,7 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
     const [backward_Btn, setBackwardBtn] = useState(false);
     const [breadCrumbPath, setBreadCrumbPath] = useState("");
     const [isInputFieldDisable, setIsInputFieldDisable] = useState(false);
+    const [loading_01, setLoading_01] = useState(false);
 
     useEffect(() => {
         if (currentDir) {
@@ -40,14 +41,19 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                             values={{
                                 error,
                                 loading,
-                                isInputFieldDisable
+                                isInputFieldDisable,
+                                isCancelBtnDisable,
+                                isSelectBtnDisable
                             }}
                             setters={{
                                 setRootFolder,
                                 setFallBackServer,
                                 setBreadCrumbPath,
                                 setLoading,
-                                setIsInputFieldDisable
+                                setIsInputFieldDisable,
+                                setError,
+                                setIsCancelBtnDisable,
+                                setIsSelectBtnDisable
                             }}
                             action={{
                                 validateRootFolder
@@ -63,7 +69,7 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                                     redo,
                                     canRedo,
                                     sliptPaths,
-                                    files
+                                    files,
                                 }}
 
                                 setters={{
@@ -74,6 +80,8 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                                     setIsInputFieldDisable,
                                     setBreadCrumbPath,
                                     setFfName,
+                                    setLoading_01,
+                                    setError
                                 }}
                                 action={{
                                     validateRootFolder
@@ -82,15 +90,19 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                             <Middle_div_of_popup
                                 values={{
                                     loading,
+                                    loading_01,
                                     filtered_files,
                                     selectType,
-                                    currentDir
+                                    currentDir,
+                                    error,
                                 }}
                                 setters={{
                                     setIsSelectBtnDisable,
                                     setIsCancelBtnDisable,
                                     setIsInputFieldDisable,
-                                    setFfName
+                                    setFfName,
+                                    setError,
+                                    setLoading_01,
                                 }}
                                 action={{
                                     validateRootFolder
@@ -113,7 +125,8 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                                     setIsInputFieldDisable,
                                     setFallBackServer,
                                     setRootFolder,
-                                    setSelectType
+                                    setSelectType,
+                                    setError
                                 }}
                                 actions={{
                                     validateRootFolder,

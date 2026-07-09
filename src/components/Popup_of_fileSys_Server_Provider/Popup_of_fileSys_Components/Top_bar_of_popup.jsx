@@ -20,7 +20,9 @@ export function Top_bar_of_popup({ values, setters, action }) {
         setIsCancelBtnDisable,
         setIsInputFieldDisable,
         setBreadCrumbPath,
-        setFfName
+        setFfName,
+        setLoading_01,
+        setError
     } = setters;
 
     const {
@@ -65,7 +67,7 @@ export function Top_bar_of_popup({ values, setters, action }) {
                         return (
                             <React.Fragment key={idx}>
                                 <span
-                                    onClick={() => HandleBreadCrumbClick(idx, setBreadCrumbPath, setFfName, sliptPaths, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder)}
+                                    onClick={() => HandleBreadCrumbClick(idx, setBreadCrumbPath, setFfName, sliptPaths, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setLoading_01, setError)}
                                     style={{ "cursor": "pointer", "textWrapMode": "nowrap" }}>
                                     {path}
                                 </span>

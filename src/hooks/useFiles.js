@@ -10,7 +10,7 @@ export function useFiles() {
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [fallBackServer, setFallBackServer] = useState(false);
-  const [error, SetError] = useState(null);
+  const [error, setError] = useState(null);
   const {
     state,
     setNewState,
@@ -28,14 +28,14 @@ export function useFiles() {
 
   const openFolder = async (path = currentDir) => {
     setLoading(true);
-    SetError(null)
+    setError(null);
     try {
       const Provider_status = await CheckFileSystemAPI(path);
       if (Provider_status == 49) {
         const result = await BrowserProvider.read_Directories();
         console.log(result);
         if (!result.success) {
-          SetError(result.message);
+          setError(result.message);
           return;
         }
         setCurrentDir(result.dirPath);
@@ -46,28 +46,28 @@ export function useFiles() {
       }
       return true;
     } catch (err) {
-      SetError(err.message || "Something went wrong.");
+      setError(err.message || "Something went wrong.");
       return false;
     } finally {
       setLoading(false);
     }
   };
 
-  const validateRootFolder = async (path) => {
-    setLoading(true);
-    SetError(null);
-
+  const validateRootFolder = async (path, option = {}) => {
+    const {useHookLoader = true} = option;
+    if(useHookLoader) setLoading(true);
+    setError(null);
     try {
       const result = await ServerProvider.read_Directories(path);
       if (!result.success) {
-        SetError(result.message);
+        setError(result.message);
         return false;
       }
       console.log(result)
       setNewState(result);
       return true;
     } catch (err) {
-      SetError(err.message || "Something went wrong.");
+      setError(err.message || "Something went wrong.");
       return false;
     } finally {
       setLoading(false);
@@ -93,5 +93,6 @@ export function useFiles() {
     canRedo,
     reset,
     setLoading,
+    setError,
   };
 }

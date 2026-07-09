@@ -7,7 +7,9 @@ export function Root_folder({ values, setters, action }) {
     const {
         error,
         loading,
-        isInputFieldDisable
+        isInputFieldDisable,
+        isCancelBtnDisable,
+        isSelectBtnDisable
     } = values;
 
     const {
@@ -15,7 +17,10 @@ export function Root_folder({ values, setters, action }) {
         setFallBackServer,
         setBreadCrumbPath,
         setLoading,
-        setIsInputFieldDisable
+        setIsInputFieldDisable,
+        setError,
+        setIsCancelBtnDisable,
+        setIsSelectBtnDisable
     } = setters;
 
     const {
@@ -23,8 +28,8 @@ export function Root_folder({ values, setters, action }) {
     } = action;
 
     const [rootPath, setRootPath] = useState(null);
-    const [isSelectBtnDisbale, setIsSelectBtnDisable] = useState(true);
-    const [isCancelBtnDisable, setIsCancelBtnDisable] = useState(false);
+    // const [isSelectBtnDisbale, setIsSelectBtnDisable] = useState(true);
+    // const [isCancelBtnDisable, setIsCancelBtnDisable] = useState(false);
     return (
         <>
             <div className="rootFolder_div">
@@ -33,14 +38,14 @@ export function Root_folder({ values, setters, action }) {
                     <input type="text" id="Root_folder_input"
                         onChange={(e) => Root_folder_input_handle(e, setRootPath, setBreadCrumbPath, setIsSelectBtnDisable)}
                         disabled={isInputFieldDisable}
-                        style={{ cursor: isInputFieldDisable ? "not-allowed" : "pointer", }}
+                        style={{ cursor: isInputFieldDisable ? "not-allowed" : "auto", }}
                     />
                 </div>
                 {error &&
                     <span className="rootFolder_error">{error}</span>
                 }
                 <div className="rootFolder_div_btn">
-                    <button className="select_btn" disabled={isSelectBtnDisbale} onClick={() => handle_Validate_RootFolder(setIsCancelBtnDisable, setIsInputFieldDisable, setIsSelectBtnDisable, validateRootFolder, setRootFolder, rootPath)} style={{ cursor: isSelectBtnDisbale ? "not-allowed" : "pointer", padding: loading ? "0px" : "6px" }}>{
+                    <button className="select_btn" disabled={isSelectBtnDisable} onClick={() => handle_Validate_RootFolder(setIsCancelBtnDisable, setIsInputFieldDisable, setIsSelectBtnDisable, validateRootFolder, setRootFolder, rootPath, setError)} style={{ cursor: isSelectBtnDisable ? "not-allowed" : "pointer", padding: loading ? "0px" : "6px" }}>{
                         loading ?
                             <Loader H={21} W={21} /> :
                             "Select"}

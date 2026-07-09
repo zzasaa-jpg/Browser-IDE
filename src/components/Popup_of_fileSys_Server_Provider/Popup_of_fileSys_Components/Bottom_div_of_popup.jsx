@@ -19,7 +19,8 @@ export function Bottom_div_of_popup({ values, setters, actions }) {
         setIsInputFieldDisable,
         setFallBackServer,
         setRootFolder,
-        setSelectType
+        setSelectType,
+        setError
     } = setters;
     const {
         validateRootFolder,
@@ -34,7 +35,7 @@ export function Bottom_div_of_popup({ values, setters, actions }) {
                     id="popup_input" value={ffName}
                     onChange={(e) => Handle_popup_input(e, setFfName, setIsSelectBtnDisable)}
                     disabled={isInputFieldDisable}
-                    style={{ cursor: isInputFieldDisable ? "not-allowed" : "pointer", }}
+                    style={{ cursor: isInputFieldDisable ? "not-allowed" : "auto", }}
                 />
                 <select className="select_tag" value={selectType} onChange={(e) => setSelectType(e.target.value)}>
                     <option value={"directory"}>Only Folder</option>
@@ -46,7 +47,7 @@ export function Bottom_div_of_popup({ values, setters, actions }) {
                 <span className="popup_error">{error}</span>
             }
             <div className="popup_btns_div">
-                <button className="select_btn" disabled={isSelectBtnDisable} onClick={() => HandleSelect(setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, ffName, setFallBackServer)} style={{ cursor: isSelectBtnDisable ? "not-allowed" : "pointer", padding: loading ? "0px" : "6px" }}>{
+                <button className="select_btn" disabled={isSelectBtnDisable} onClick={() => HandleSelect(setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, ffName, setFallBackServer, setError)} style={{ cursor: isSelectBtnDisable ? "not-allowed" : "pointer", padding: loading ? "0px" : "6px" }}>{
                     loading ?
                         <Loader H={21} W={21} /> :
                         "Select"}</button>
