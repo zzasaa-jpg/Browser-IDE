@@ -13,7 +13,6 @@ export async function Popup_inside_fetch_ff(path, setIsSelectBtnDisable, setIsCa
         setIsPathNavigationDivDisable(false);
     } else {
         setLoading_01(false);
-        setHasValidationError(true);
         const time = setTimeout(() => {
             setError(null);
             clearTimeout(time);
