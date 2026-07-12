@@ -2,25 +2,27 @@ export async function handle_Validate_RootFolder(setIsCancelBtnDisable, setIsInp
     setIsSelectBtnDisable(true);
     setIsCancelBtnDisable(true);
     setIsInputFieldDisable(true);
-    const {success, tree} = await validateRootFolder(rootPath);
+    const { success, tree } = await validateRootFolder(rootPath);
     if (success) {
         tree.length == 0 ? setIsSelectBtnDisable(true) : setIsSelectBtnDisable(false);
         setIsCancelBtnDisable(false);
         setIsInputFieldDisable(false);
         setRootFolder(false);
     } else {
+        setIsSelectBtnDisable(true);
+        setIsCancelBtnDisable(true);
+        setIsInputFieldDisable(true);
         const time = setTimeout(() => {
             setError(null);
             clearTimeout(time);
+            setIsCancelBtnDisable(false);
+            setIsInputFieldDisable(false);
         }, 1800);
-        setIsCancelBtnDisable(false);
-        setIsInputFieldDisable(false);
+
     }
 }
 
-export function resetStates_of_root_folder(setRootPath, setIsSelectBtnDisable, setFallBackServer) {
-    setRootPath(null);
-    setIsSelectBtnDisable(false);
+export function resetStates_of_root_folder(setFallBackServer) {
     setFallBackServer(false);
 }
 

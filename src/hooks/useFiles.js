@@ -63,7 +63,7 @@ export function useFiles() {
         setError(result.message);
         return false;
       }
-      console.log(result)
+      console.log(result);
       setNewState(result);
       return { "success": true, "tree": result.tree };
     } catch (err) {

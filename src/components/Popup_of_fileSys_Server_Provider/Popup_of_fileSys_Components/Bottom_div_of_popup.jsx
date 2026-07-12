@@ -44,15 +44,19 @@ export function Bottom_div_of_popup({ values, setters, actions }) {
                     <option value={"file&folder"}>Both Folder & Files</option>
                 </select>
             </div>
-            {error &&
-                <span className="popup_error">{error}</span>
-            }
-            <div className="popup_btns_div">
-                <button className="select_btn" disabled={isSelectBtnDisable} onClick={() => HandleSelect(setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, ffName, setFallBackServer, setError, setIsPathNavigationDivDisable)} style={{ cursor: isSelectBtnDisable ? "not-allowed" : "pointer", padding: loading ? "0px" : "6px" }}>{
-                    loading ?
-                        <Loader H={21} W={21} /> :
-                        "Select"}</button>
-                <button className="cancel_btn" disabled={isCancelBtnDisable} onClick={() => ResetStates_of_popup(setFfName, setSelectType, setIsSelectBtnDisable, setIsInputFieldDisable, setRootFolder, reset)} style={{ cursor: isCancelBtnDisable ? "not-allowed" : "pointer" }}>Cancel</button>
+            <div className="popup_btns_parent_div">
+                <div className="popup_error_div">
+                    {error &&
+                        <span className="popup_error">{error}</span>
+                    }
+                </div>
+                <div className="popup_btns_child_div">
+                    <button className="select_btn" disabled={isSelectBtnDisable} onClick={() => HandleSelect(setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, ffName, setFallBackServer, setError, setIsPathNavigationDivDisable)} style={{ cursor: isSelectBtnDisable ? "not-allowed" : "pointer", padding: loading ? "0px" : "6px" }}>{
+                        loading ?
+                            <Loader H={21} W={21} /> :
+                            "Select"}</button>
+                    <button className="cancel_btn" disabled={isCancelBtnDisable} onClick={() => ResetStates_of_popup(setFfName, setSelectType, setIsSelectBtnDisable, setIsInputFieldDisable, setRootFolder, reset)} style={{ cursor: isCancelBtnDisable ? "not-allowed" : "pointer" }}>Cancel</button>
+                </div>
             </div>
         </div>
     )

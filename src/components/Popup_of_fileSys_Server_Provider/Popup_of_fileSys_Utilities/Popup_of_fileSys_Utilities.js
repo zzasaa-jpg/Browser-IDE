@@ -35,13 +35,18 @@ export async function HandleSelect(setIsSelectBtnDisable, setIsCancelBtnDisable,
         setIsInputFieldDisable(false);
         setIsPathNavigationDivDisable(false);
     } else {
+        setIsSelectBtnDisable(true);
+        setIsCancelBtnDisable(true);
+        setIsInputFieldDisable(true);
+        setIsPathNavigationDivDisable(true);
         const time = setTimeout(() => {
             setError(null);
             clearTimeout(time);
+            setIsCancelBtnDisable(false);
+            setIsInputFieldDisable(false);
+            setIsPathNavigationDivDisable(false);
         }, 1800);
-        setIsCancelBtnDisable(false);
-        setIsInputFieldDisable(false);
-        setIsPathNavigationDivDisable(false);
+
     }
 }
 
@@ -67,10 +72,9 @@ export function Handle_popup_folder_files_states_event(file, setFfName, setIsSel
 }
 
 export function ResetStates_of_popup(setFfName, setSelectType, setIsSelectBtnDisable, setIsInputFieldDisable, setRootFolder, reset) {
-    setFfName("");
-    setSelectType("file&folder")
+    setSelectType("file&folder");
     setIsSelectBtnDisable(true);
     setIsInputFieldDisable(false);
-    setRootFolder(true)
+    setRootFolder(true);
     reset();
 }

@@ -23,9 +23,10 @@ label {
     box-shadow: 10px 10px 50px black;
 }
 
-.rootFolder_div_btn {
+.rootFolder_parent_div_btn {
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
+    align-items: center;
     gap: 10px;
     margin: 10px 0;
 }
@@ -33,4 +34,14 @@ label {
 .rootFolder_error {
     color: red;
     font-size: 13px
+}
+
+.rootFolder_child_div_btn {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.rootFolder_error_div {
+    width: 500px;
 }
