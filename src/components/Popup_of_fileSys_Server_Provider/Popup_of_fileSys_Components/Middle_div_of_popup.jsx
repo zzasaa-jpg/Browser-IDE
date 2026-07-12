@@ -9,7 +9,7 @@ export function Middle_div_of_popup({ values, setters, action }) {
         filtered_files,
         selectType,
         currentDir,
-        error,
+        error
     } = values;
     const {
         setIsSelectBtnDisable,
@@ -18,15 +18,11 @@ export function Middle_div_of_popup({ values, setters, action }) {
         setFfName,
         setError,
         setLoading_01,
+        setIsPathNavigationDivDisable,
     } = setters;
     const {
         validateRootFolder
     } = action;
-
-    useEffect(() => {
-        if (loading_01 || loading || error) return;
-        setIsSelectBtnDisable(filtered_files.length == 0);
-    }, [filtered_files, loading_01, loading, error]);
 
     return (
         <div className="Middle_div_of_popup" style={{
@@ -45,7 +41,7 @@ export function Middle_div_of_popup({ values, setters, action }) {
                         filtered_files.map((file, idx) =>
                             <div className="popup_folder_files_div" key={idx}
                                 onClick={() => Handle_popup_folder_files_states_event(file, setFfName, setIsSelectBtnDisable, currentDir)}
-                                onDoubleClick={() => Popup_inside_fetch_ff(`${currentDir}/${file.name}`, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setError, setLoading_01)}
+                                onDoubleClick={() => Popup_inside_fetch_ff(`${currentDir}/${file.name}`, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setError, setLoading_01, setIsPathNavigationDivDisable)}
                             >
                                 <img src={file.type == "directory" ? "src/assets/folder-outline.svg" : "src/assets/document-text-outline.svg"} alt="img" width={80} height={80} />
                                 <span className="file_list_tag">{file.name}</span>

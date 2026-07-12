@@ -54,8 +54,8 @@ export function useFiles() {
   };
 
   const validateRootFolder = async (path, option = {}) => {
-    const {useHookLoader = true} = option;
-    if(useHookLoader) setLoading(true);
+    const { useHookLoader = true } = option;
+    if (useHookLoader) setLoading(true);
     setError(null);
     try {
       const result = await ServerProvider.read_Directories(path);
@@ -65,7 +65,7 @@ export function useFiles() {
       }
       console.log(result)
       setNewState(result);
-      return true;
+      return { "success": true, "tree": result.tree };
     } catch (err) {
       setError(err.message || "Something went wrong.");
       return false;

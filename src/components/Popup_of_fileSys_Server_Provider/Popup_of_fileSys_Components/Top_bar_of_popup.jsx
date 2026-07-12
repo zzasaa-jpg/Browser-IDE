@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useEffectEvent} from "react";
 import { HandleBreadCrumbClick } from "../Popup_of_fileSys_Utilities/Popup_of_fileSys_Utilities";
 
 export function Top_bar_of_popup({ values, setters, action }) {
@@ -10,7 +10,8 @@ export function Top_bar_of_popup({ values, setters, action }) {
         redo,
         canRedo,
         sliptPaths,
-        files
+        files,
+        isPathNavigationDivDisable
     } = values;
 
     const {
@@ -22,12 +23,18 @@ export function Top_bar_of_popup({ values, setters, action }) {
         setBreadCrumbPath,
         setFfName,
         setLoading_01,
-        setError
+        setError,
+        setIsPathNavigationDivDisable
     } = setters;
 
     const {
         validateRootFolder
     } = action;
+
+    /* UseEffect for undo and redo button when files or folder empty in 'middle_div_of_popup.jsx' than select button disable or enable it */
+    useEffect(()=>{
+        files.length === 0 ? setIsSelectBtnDisable(true) : setIsSelectBtnDisable(false);
+    },[files]);
 
     return (
         <div className="top_bar_of_popup">
@@ -40,8 +47,8 @@ export function Top_bar_of_popup({ values, setters, action }) {
                     className={`popup_icon ${forward_Btn ? "pressed" : ""}`}
                     onClick={undo}
                     style={{
-                        "userSelect": !canUndo ? "none" : "auto",
-                        "pointerEvents": !canUndo ? "none" : "auto",
+                        "userSelect": !canUndo || isPathNavigationDivDisable ? "none" : "auto",
+                        "pointerEvents": !canUndo || isPathNavigationDivDisable ? "none" : "auto",
                     }}
                 />
                 <img src="src\assets\Popup_top_bar_icons\arrow-forward-outline.svg"
@@ -52,12 +59,12 @@ export function Top_bar_of_popup({ values, setters, action }) {
                     className={`popup_icon ${backward_Btn ? "pressed" : ""}`}
                     onClick={redo}
                     style={{
-                        "userSelect": !canRedo ? "none" : "auto",
-                        "pointerEvents": !canRedo ? "none" : "auto",
+                        "userSelect": !canRedo || isPathNavigationDivDisable ? "none" : "auto",
+                        "pointerEvents": !canRedo || isPathNavigationDivDisable ? "none" : "auto",
                     }}
                 />
             </div>
-            <div className="path_navigation_div">
+            <div className="path_navigation_div"  style={{"pointerEvents": isPathNavigationDivDisable ? "none" : "auto"}}>
                 {
                     sliptPaths.map((path, idx) => {
                         const isNoDiretories = files.every((file) => file.type !== "directory");
@@ -67,7 +74,7 @@ export function Top_bar_of_popup({ values, setters, action }) {
                         return (
                             <React.Fragment key={idx}>
                                 <span
-                                    onClick={() => HandleBreadCrumbClick(idx, setBreadCrumbPath, setFfName, sliptPaths, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setLoading_01, setError)}
+                                    onClick={() => HandleBreadCrumbClick(idx, setBreadCrumbPath, setFfName, sliptPaths, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setLoading_01, setError, setIsPathNavigationDivDisable)}
                                     style={{ "cursor": "pointer", "textWrapMode": "nowrap" }}>
                                     {path}
                                 </span>

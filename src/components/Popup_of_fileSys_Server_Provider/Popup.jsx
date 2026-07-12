@@ -17,6 +17,7 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
     const [breadCrumbPath, setBreadCrumbPath] = useState("");
     const [isInputFieldDisable, setIsInputFieldDisable] = useState(false);
     const [loading_01, setLoading_01] = useState(false);
+    const [isPathNavigationDivDisable, setIsPathNavigationDivDisable] = useState(false);
 
     useEffect(() => {
         if (currentDir) {
@@ -70,6 +71,7 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                                     canRedo,
                                     sliptPaths,
                                     files,
+                                    isPathNavigationDivDisable
                                 }}
 
                                 setters={{
@@ -81,7 +83,8 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                                     setBreadCrumbPath,
                                     setFfName,
                                     setLoading_01,
-                                    setError
+                                    setError,
+                                    setIsPathNavigationDivDisable
                                 }}
                                 action={{
                                     validateRootFolder
@@ -103,6 +106,7 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                                     setFfName,
                                     setError,
                                     setLoading_01,
+                                    setIsPathNavigationDivDisable,
                                 }}
                                 action={{
                                     validateRootFolder
@@ -126,7 +130,8 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                                     setFallBackServer,
                                     setRootFolder,
                                     setSelectType,
-                                    setError
+                                    setError,
+                                    setIsPathNavigationDivDisable
                                 }}
                                 actions={{
                                     validateRootFolder,

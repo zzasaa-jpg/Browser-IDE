@@ -1,15 +1,16 @@
-export async function Popup_inside_fetch_ff(path, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setError, setLoading_01) {
-    console.log(setIsSelectBtnDisable)
+export async function Popup_inside_fetch_ff(path, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setError, setLoading_01, setIsPathNavigationDivDisable) {
     setIsSelectBtnDisable(true);
     setIsCancelBtnDisable(true);
     setIsInputFieldDisable(true);
+    setIsPathNavigationDivDisable(true);
     setLoading_01(true);
-    const success = await validateRootFolder(path, { useHookLoader: false });
+    const { success, tree } = await validateRootFolder(path, { useHookLoader: false });
     if (success) {
         setLoading_01(false);
-        setIsSelectBtnDisable(false);
+        tree.length == 0 ? setIsSelectBtnDisable(true) : setIsSelectBtnDisable(false);
         setIsCancelBtnDisable(false);
         setIsInputFieldDisable(false);
+        setIsPathNavigationDivDisable(false);
     } else {
         setLoading_01(false);
         setHasValidationError(true);
@@ -19,18 +20,21 @@ export async function Popup_inside_fetch_ff(path, setIsSelectBtnDisable, setIsCa
         }, 1800);
         setIsCancelBtnDisable(false);
         setIsInputFieldDisable(false);
+        setIsPathNavigationDivDisable(false);
     }
 }
 
-export async function HandleSelect(setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, ffName, setFallBackServer, setError) {
+export async function HandleSelect(setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, ffName, setFallBackServer, setError, setIsPathNavigationDivDisable) {
     setIsSelectBtnDisable(true);
     setIsCancelBtnDisable(true);
     setIsInputFieldDisable(true);
+    setIsPathNavigationDivDisable(true);
     const success = await validateRootFolder(ffName);
     if (success) {
         setFallBackServer(false);
         setIsCancelBtnDisable(false);
         setIsInputFieldDisable(false);
+        setIsPathNavigationDivDisable(false);
     } else {
         const time = setTimeout(() => {
             setError(null);
@@ -38,15 +42,16 @@ export async function HandleSelect(setIsSelectBtnDisable, setIsCancelBtnDisable,
         }, 1800);
         setIsCancelBtnDisable(false);
         setIsInputFieldDisable(false);
+        setIsPathNavigationDivDisable(false);
     }
 }
 
-export function HandleBreadCrumbClick(idx, setBreadCrumbPath, setFfName, sliptPaths, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setLoading_01, setError) {
+export function HandleBreadCrumbClick(idx, setBreadCrumbPath, setFfName, sliptPaths, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setLoading_01, setError, setIsPathNavigationDivDisable) {
     const newPaths = sliptPaths.slice(0, idx + 1).join("/");
     setBreadCrumbPath(newPaths);
     setFfName(newPaths);
     const time = setTimeout(() => {
-        Popup_inside_fetch_ff(newPaths, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setError, setLoading_01);
+        Popup_inside_fetch_ff(newPaths, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setError, setLoading_01, setIsPathNavigationDivDisable);
         clearInterval(time);
     }, 150);
 }
@@ -54,7 +59,7 @@ export function HandleBreadCrumbClick(idx, setBreadCrumbPath, setFfName, sliptPa
 export function Handle_popup_input(e, setFfName, setIsSelectBtnDisable) {
     const inputValue = e.target.value.replace(/\s+/g, '');
     setFfName(inputValue);
-    inputValue.length == 0 ? setIsSelectBtnDisable(true) : setIsSelectBtnDisable(false);
+    inputValue.length === 0 ? setIsSelectBtnDisable(true) : setIsSelectBtnDisable(false);
 }
 
 export function Handle_popup_folder_files_states_event(file, setFfName, setIsSelectBtnDisable, currentDir) {

@@ -20,7 +20,8 @@ export function Bottom_div_of_popup({ values, setters, actions }) {
         setFallBackServer,
         setRootFolder,
         setSelectType,
-        setError
+        setError,
+        setIsPathNavigationDivDisable
     } = setters;
     const {
         validateRootFolder,
@@ -47,7 +48,7 @@ export function Bottom_div_of_popup({ values, setters, actions }) {
                 <span className="popup_error">{error}</span>
             }
             <div className="popup_btns_div">
-                <button className="select_btn" disabled={isSelectBtnDisable} onClick={() => HandleSelect(setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, ffName, setFallBackServer, setError)} style={{ cursor: isSelectBtnDisable ? "not-allowed" : "pointer", padding: loading ? "0px" : "6px" }}>{
+                <button className="select_btn" disabled={isSelectBtnDisable} onClick={() => HandleSelect(setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, ffName, setFallBackServer, setError, setIsPathNavigationDivDisable)} style={{ cursor: isSelectBtnDisable ? "not-allowed" : "pointer", padding: loading ? "0px" : "6px" }}>{
                     loading ?
                         <Loader H={21} W={21} /> :
                         "Select"}</button>

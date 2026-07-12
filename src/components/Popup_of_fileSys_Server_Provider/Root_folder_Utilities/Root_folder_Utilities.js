@@ -2,9 +2,9 @@ export async function handle_Validate_RootFolder(setIsCancelBtnDisable, setIsInp
     setIsSelectBtnDisable(true);
     setIsCancelBtnDisable(true);
     setIsInputFieldDisable(true);
-    const success = await validateRootFolder(rootPath);
+    const {success, tree} = await validateRootFolder(rootPath);
     if (success) {
-        setIsSelectBtnDisable(false);
+        tree.length == 0 ? setIsSelectBtnDisable(true) : setIsSelectBtnDisable(false);
         setIsCancelBtnDisable(false);
         setIsInputFieldDisable(false);
         setRootFolder(false);
