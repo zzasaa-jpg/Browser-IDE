@@ -18,6 +18,7 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
     const [isInputFieldDisable, setIsInputFieldDisable] = useState(false);
     const [loading_01, setLoading_01] = useState(false);
     const [isPathNavigationDivDisable, setIsPathNavigationDivDisable] = useState(false);
+    const [separatorVisibility, setSeparatorVisibility] = useState(false);
 
     useEffect(() => {
         if (currentDir) {
@@ -71,7 +72,8 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                                     canRedo,
                                     sliptPaths,
                                     files,
-                                    isPathNavigationDivDisable
+                                    isPathNavigationDivDisable,
+                                    separatorVisibility,
                                 }}
 
                                 setters={{
@@ -84,7 +86,8 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                                     setFfName,
                                     setLoading_01,
                                     setError,
-                                    setIsPathNavigationDivDisable
+                                    setIsPathNavigationDivDisable,
+                                    setSeparatorVisibility
                                 }}
                                 action={{
                                     validateRootFolder
@@ -97,7 +100,7 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                                     filtered_files,
                                     selectType,
                                     currentDir,
-                                    error,
+                                    error
                                 }}
                                 setters={{
                                     setIsSelectBtnDisable,
@@ -107,6 +110,7 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                                     setError,
                                     setLoading_01,
                                     setIsPathNavigationDivDisable,
+                                    setSeparatorVisibility
                                 }}
                                 action={{
                                     validateRootFolder
@@ -131,7 +135,8 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                                     setRootFolder,
                                     setSelectType,
                                     setError,
-                                    setIsPathNavigationDivDisable
+                                    setIsPathNavigationDivDisable,
+                                    setSeparatorVisibility
                                 }}
                                 actions={{
                                     validateRootFolder,

@@ -1,0 +1,9 @@
+.separator_div {
+    height: 300px;
+    width: 200px;
+    background-color: #0000005e;
+    /* background-color: #d4ebff; */
+    border: 1px dotted black;
+    position: fixed;
+    overflow-y: scroll;
+}

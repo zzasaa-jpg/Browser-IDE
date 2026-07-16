@@ -50,7 +50,8 @@ export async function HandleSelect(setIsSelectBtnDisable, setIsCancelBtnDisable,
     }
 }
 
-export function HandleBreadCrumbClick(idx, setBreadCrumbPath, setFfName, sliptPaths, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setLoading_01, setError, setIsPathNavigationDivDisable) {
+export function HandleBreadCrumbClick(idx, setBreadCrumbPath, setFfName, sliptPaths, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setLoading_01, setError, setIsPathNavigationDivDisable, setSeparatorVisibility) {
+    setSeparatorVisibility(false);
     const newPaths = sliptPaths.slice(0, idx + 1).join("/");
     setBreadCrumbPath(newPaths);
     setFfName(newPaths);
@@ -60,21 +61,30 @@ export function HandleBreadCrumbClick(idx, setBreadCrumbPath, setFfName, sliptPa
     }, 150);
 }
 
-export function Handle_popup_input(e, setFfName, setIsSelectBtnDisable) {
+export function Handle_popup_input(e, setFfName, setIsSelectBtnDisable, setSeparatorVisibility) {
+    setSeparatorVisibility(false);
     const inputValue = e.target.value.replace(/\s+/g, '');
     setFfName(inputValue);
     inputValue.length === 0 ? setIsSelectBtnDisable(true) : setIsSelectBtnDisable(false);
 }
 
-export function Handle_popup_folder_files_states_event(file, setFfName, setIsSelectBtnDisable, currentDir) {
+export function Handle_popup_folder_files_states_event(file, setFfName, setIsSelectBtnDisable, currentDir, setSeparatorVisibility) {
+    setSeparatorVisibility(false);
     setFfName(`${currentDir}/${file.name}`);
     setIsSelectBtnDisable(false);
 }
 
-export function ResetStates_of_popup(setFfName, setSelectType, setIsSelectBtnDisable, setIsInputFieldDisable, setRootFolder, reset) {
+export function ResetStates_of_popup(setSelectType, setIsSelectBtnDisable, setIsInputFieldDisable, setRootFolder, reset, setSeparatorVisibility) {
+    setSeparatorVisibility(false);
     setSelectType("file&folder");
     setIsSelectBtnDisable(true);
     setIsInputFieldDisable(false);
     setRootFolder(true);
     reset();
+}
+
+export function handleBreadCrumbSeparatorClick(event, setSeparatorTop, setSeparatorLeft, setSeparatorVisibility, idx, separatorVisibility) {
+    setSeparatorVisibility(!separatorVisibility);
+    setSeparatorTop(event.clientY + 17);
+    setSeparatorLeft(event.clientX + 6);
 }

@@ -19,6 +19,7 @@ export function Middle_div_of_popup({ values, setters, action }) {
         setError,
         setLoading_01,
         setIsPathNavigationDivDisable,
+        setSeparatorVisibility
     } = setters;
     const {
         validateRootFolder
@@ -40,7 +41,7 @@ export function Middle_div_of_popup({ values, setters, action }) {
                     ) : (
                         filtered_files.map((file, idx) =>
                             <div className="popup_folder_files_div" key={idx} style={{ cursor: file.type == "directory" ? "pointer" : "auto" }}
-                                onClick={() => Handle_popup_folder_files_states_event(file, setFfName, setIsSelectBtnDisable, currentDir)}
+                                onClick={() => Handle_popup_folder_files_states_event(file, setFfName, setIsSelectBtnDisable, currentDir, setSeparatorVisibility)}
                                 onDoubleClick={() => file.type == "directory" ? Popup_inside_fetch_ff(`${currentDir}/${file.name}`, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setError, setLoading_01, setIsPathNavigationDivDisable) : null}
                             >
                                 <img src={file.type == "directory" ? "src/assets/folder-outline.svg" : "src/assets/document-text-outline.svg"} alt="img" width={80} height={80} />

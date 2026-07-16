@@ -1,7 +1,11 @@
-import React, {useEffect, useEffectEvent} from "react";
-import { HandleBreadCrumbClick } from "../Popup_of_fileSys_Utilities/Popup_of_fileSys_Utilities";
+import React, { useEffect, useEffectEvent, useState } from "react";
+import { HandleBreadCrumbClick, handleBreadCrumbSeparatorClick } from "../Popup_of_fileSys_Utilities/Popup_of_fileSys_Utilities";
+import "../Popup_of_fileSys_Components/Styles/separator.css";
 
 export function Top_bar_of_popup({ values, setters, action }) {
+    const [separatorLeft, setSeparatorLeft] = useState(0);
+    const [separatortop, setSeparatorTop] = useState(0);
+
     const {
         forward_Btn,
         undo,
@@ -11,7 +15,8 @@ export function Top_bar_of_popup({ values, setters, action }) {
         canRedo,
         sliptPaths,
         files,
-        isPathNavigationDivDisable
+        isPathNavigationDivDisable,
+        separatorVisibility
     } = values;
 
     const {
@@ -24,7 +29,8 @@ export function Top_bar_of_popup({ values, setters, action }) {
         setFfName,
         setLoading_01,
         setError,
-        setIsPathNavigationDivDisable
+        setIsPathNavigationDivDisable,
+        setSeparatorVisibility
     } = setters;
 
     const {
@@ -32,58 +38,67 @@ export function Top_bar_of_popup({ values, setters, action }) {
     } = action;
 
     /* UseEffect for undo and redo button when files or folder empty in 'middle_div_of_popup.jsx' than select button disable or enable it */
-    useEffect(()=>{
+    useEffect(() => {
         files.length === 0 ? setIsSelectBtnDisable(true) : setIsSelectBtnDisable(false);
-    },[files]);
+    }, [files]);
 
     return (
-        <div className="top_bar_of_popup">
-            <div className="forward_and_backward_btns">
-                <img src="src\assets\Popup_top_bar_icons\arrow-back-outline.svg"
-                    alt="img" width={20} height={20}
-                    onPointerDown={() => setForwardBtn(true)}
-                    onPointerUp={() => setForwardBtn(false)}
-                    onPointerLeave={() => setForwardBtn(false)}
-                    className={`popup_icon ${forward_Btn ? "pressed" : ""}`}
-                    onClick={undo}
-                    style={{
-                        "userSelect": !canUndo || isPathNavigationDivDisable ? "none" : "auto",
-                        "pointerEvents": !canUndo || isPathNavigationDivDisable ? "none" : "auto",
-                    }}
-                />
-                <img src="src\assets\Popup_top_bar_icons\arrow-forward-outline.svg"
-                    alt="img" width={20} height={20}
-                    onPointerDown={() => setBackwardBtn(true)}
-                    onPointerUp={() => setBackwardBtn(false)}
-                    onPointerLeave={() => setBackwardBtn(false)}
-                    className={`popup_icon ${backward_Btn ? "pressed" : ""}`}
-                    onClick={redo}
-                    style={{
-                        "userSelect": !canRedo || isPathNavigationDivDisable ? "none" : "auto",
-                        "pointerEvents": !canRedo || isPathNavigationDivDisable ? "none" : "auto",
-                    }}
-                />
+        <>
+            <div className="top_bar_of_popup">
+                <div className="forward_and_backward_btns">
+                    <img src="src\assets\Popup_top_bar_icons\arrow-back-outline.svg"
+                        alt="img" width={20} height={20}
+                        onPointerDown={() => setForwardBtn(true)}
+                        onPointerUp={() => setForwardBtn(false)}
+                        onPointerLeave={() => setForwardBtn(false)}
+                        className={`popup_icon ${forward_Btn ? "pressed" : ""}`}
+                        onClick={undo}
+                        style={{
+                            "userSelect": !canUndo || isPathNavigationDivDisable ? "none" : "auto",
+                            "pointerEvents": !canUndo || isPathNavigationDivDisable ? "none" : "auto",
+                        }}
+                    />
+                    <img src="src\assets\Popup_top_bar_icons\arrow-forward-outline.svg"
+                        alt="img" width={20} height={20}
+                        onPointerDown={() => setBackwardBtn(true)}
+                        onPointerUp={() => setBackwardBtn(false)}
+                        onPointerLeave={() => setBackwardBtn(false)}
+                        className={`popup_icon ${backward_Btn ? "pressed" : ""}`}
+                        onClick={redo}
+                        style={{
+                            "userSelect": !canRedo || isPathNavigationDivDisable ? "none" : "auto",
+                            "pointerEvents": !canRedo || isPathNavigationDivDisable ? "none" : "auto",
+                        }}
+                    />
+                </div>
+                <div className="path_navigation_div" style={{ "pointerEvents": isPathNavigationDivDisable ? "none" : "auto" }}>
+                    {
+                        sliptPaths.map((path, idx) => {
+                            const isNoDiretories = files.every((file) => file.type !== "directory");
+                            const showSeprator = isNoDiretories ?
+                                idx !== sliptPaths.length - 1 :
+                                idx !== sliptPaths.length;
+                            return (
+                                <React.Fragment key={idx}>
+                                    <span
+                                        onClick={() => HandleBreadCrumbClick(idx, setBreadCrumbPath, setFfName, sliptPaths, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setLoading_01, setError, setIsPathNavigationDivDisable, setSeparatorVisibility, separatorVisibility)}
+                                        style={{ "cursor": "pointer", "textWrapMode": "nowrap" }}>
+                                        {path}
+                                    </span>
+                                    {showSeprator && <span onClick={(event) => handleBreadCrumbSeparatorClick(event, setSeparatorTop, setSeparatorLeft, setSeparatorVisibility, idx, separatorVisibility)}
+                                        style={{
+                                            "cursor": "pointer",
+                                        }}>{">"}</span>}
+                                </React.Fragment >
+                            )
+                        })
+                    }
+                </div>
             </div>
-            <div className="path_navigation_div"  style={{"pointerEvents": isPathNavigationDivDisable ? "none" : "auto"}}>
-                {
-                    sliptPaths.map((path, idx) => {
-                        const isNoDiretories = files.every((file) => file.type !== "directory");
-                        const showSeprator = isNoDiretories ?
-                            idx !== sliptPaths.length - 1 :
-                            idx !== sliptPaths.length;
-                        return (
-                            <React.Fragment key={idx}>
-                                <span
-                                    onClick={() => HandleBreadCrumbClick(idx, setBreadCrumbPath, setFfName, sliptPaths, setIsSelectBtnDisable, setIsCancelBtnDisable, setIsInputFieldDisable, validateRootFolder, setLoading_01, setError, setIsPathNavigationDivDisable)}
-                                    style={{ "cursor": "pointer", "textWrapMode": "nowrap" }}>
-                                    {path}
-                                </span>
-                                {showSeprator && <span style={{ "cursor": "pointer" }}>{">"}</span>}
-                            </React.Fragment >
-                        )
-                    })
-                }
-            </div>
-        </div>
+            <div className="separator_div" style={{
+                "display": separatorVisibility ? "block" : "none",
+                "left": `${separatorLeft}px`, "top": `${separatortop}px`
+            }}></div>
+        </>
     )
 }
