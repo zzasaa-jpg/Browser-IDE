@@ -1,9 +1,28 @@
 .separator_div {
-    height: 300px;
-    width: 200px;
-    background-color: #0000005e;
-    /* background-color: #d4ebff; */
-    border: 1px dotted black;
     position: fixed;
-    overflow-y: scroll;
+    width: 200px;
+    height: 300px;
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0 0, 0.2);
+    border-radius: 8px;
+    overflow-y: auto;
+    color: #eff4ff;
+}
+
+.separator_ul {
+    margin: 5px;
+}
+
+.separator_li {
+    list-style: none;
+    font-size: 13px;
+    padding: 4px 5px;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.171);
+    }
 }

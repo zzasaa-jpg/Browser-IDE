@@ -74,6 +74,8 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                                     files,
                                     isPathNavigationDivDisable,
                                     separatorVisibility,
+                                    ffName,
+                                    currentDir
                                 }}
 
                                 setters={{

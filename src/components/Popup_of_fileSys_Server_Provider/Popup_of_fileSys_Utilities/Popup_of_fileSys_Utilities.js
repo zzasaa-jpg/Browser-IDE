@@ -83,8 +83,17 @@ export function ResetStates_of_popup(setSelectType, setIsSelectBtnDisable, setIs
     reset();
 }
 
-export function handleBreadCrumbSeparatorClick(event, setSeparatorTop, setSeparatorLeft, setSeparatorVisibility, idx, separatorVisibility) {
-    setSeparatorVisibility(!separatorVisibility);
+export function handleBreadCrumbSeparatorClick(event, setSeparatorTop, setSeparatorLeft, setSeparatorVisibility, idx, separatorVisibility, activeSeparatorIdx, setActiveSeparatorIdx, sliptPaths) {
+    const separator_path = sliptPaths.slice(0, idx + 1).join("/");
+
+    // Same separator clicked -> Toggle
+    if(activeSeparatorIdx === idx) setSeparatorVisibility(prev => !prev);
+    else {
+    // Different separator clicked -> Show it
+        setSeparatorVisibility(true);
+        setActiveSeparatorIdx(idx);
+    }
+
     setSeparatorTop(event.clientY + 17);
     setSeparatorLeft(event.clientX + 6);
 }

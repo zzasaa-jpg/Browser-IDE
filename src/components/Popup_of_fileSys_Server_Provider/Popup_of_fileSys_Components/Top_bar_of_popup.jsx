@@ -5,6 +5,7 @@ import "../Popup_of_fileSys_Components/Styles/separator.css";
 export function Top_bar_of_popup({ values, setters, action }) {
     const [separatorLeft, setSeparatorLeft] = useState(0);
     const [separatortop, setSeparatorTop] = useState(0);
+    const [activeSeparatorIdx, setActiveSeparatorIdx] = useState(null);
 
     const {
         forward_Btn,
@@ -16,7 +17,9 @@ export function Top_bar_of_popup({ values, setters, action }) {
         sliptPaths,
         files,
         isPathNavigationDivDisable,
-        separatorVisibility
+        separatorVisibility,
+        ffName,
+        currentDir
     } = values;
 
     const {
@@ -85,7 +88,7 @@ export function Top_bar_of_popup({ values, setters, action }) {
                                         style={{ "cursor": "pointer", "textWrapMode": "nowrap" }}>
                                         {path}
                                     </span>
-                                    {showSeprator && <span onClick={(event) => handleBreadCrumbSeparatorClick(event, setSeparatorTop, setSeparatorLeft, setSeparatorVisibility, idx, separatorVisibility)}
+                                    {showSeprator && <span onClick={(event) => handleBreadCrumbSeparatorClick(event, setSeparatorTop, setSeparatorLeft, setSeparatorVisibility, idx, separatorVisibility, activeSeparatorIdx, setActiveSeparatorIdx, sliptPaths)}
                                         style={{
                                             "cursor": "pointer",
                                         }}>{">"}</span>}
@@ -98,7 +101,22 @@ export function Top_bar_of_popup({ values, setters, action }) {
             <div className="separator_div" style={{
                 "display": separatorVisibility ? "block" : "none",
                 "left": `${separatorLeft}px`, "top": `${separatortop}px`
-            }}></div>
+            }}>
+                <ul className="separator_ul">
+                    {
+                        files.map((file, idx) => {
+                            {
+                                if (file.type === "directory") {
+                                    return (
+                                        <li onClick={() => console.log(file.name, "|", ffName
+                                            , "|", currentDir)} className="separator_li" key={idx}>{file.name}</li>
+                                    )
+                                }
+                            }
+                        })
+                    }
+                </ul>
+            </div>
         </>
     )
 }
