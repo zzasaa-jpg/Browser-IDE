@@ -6,7 +6,7 @@ import { Top_bar_of_popup } from "./Popup_of_fileSys_Components/Top_bar_of_popup
 import { Middle_div_of_popup } from "./Popup_of_fileSys_Components/Middle_div_of_popup";
 import { Bottom_div_of_popup } from "./Popup_of_fileSys_Components/bottom_div_of_popup";
 
-export default function Popup({ files, currentDir, setFallBackServer, openFolder, error, validateRootFolder, undo, redo, canUndo, canRedo, reset, loading, setLoading, setError }) {
+export default function Popup({ files, currentDir, setFallBackServer, openFolder, error, validateRootFolder, undo, redo, canUndo, canRedo, reset, loading, setLoading, setError, validateSeparatorPath }) {
     const [ffName, setFfName] = useState("");
     const [selectType, setSelectType] = useState("file&folder");
     const [rootFolder, setRootFolder] = useState(true);
@@ -75,7 +75,8 @@ export default function Popup({ files, currentDir, setFallBackServer, openFolder
                                     isPathNavigationDivDisable,
                                     separatorVisibility,
                                     ffName,
-                                    currentDir
+                                    currentDir,
+                                    validateSeparatorPath
                                 }}
 
                                 setters={{

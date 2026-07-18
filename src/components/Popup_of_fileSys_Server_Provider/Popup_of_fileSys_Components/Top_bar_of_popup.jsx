@@ -1,11 +1,13 @@
 import React, { useEffect, useEffectEvent, useState } from "react";
-import { HandleBreadCrumbClick, handleBreadCrumbSeparatorClick } from "../Popup_of_fileSys_Utilities/Popup_of_fileSys_Utilities";
+import { HandleBreadCrumbClick, handleBreadCrumbSeparatorClick, handleSeparatorPath } from "../Popup_of_fileSys_Utilities/Popup_of_fileSys_Utilities";
 import "../Popup_of_fileSys_Components/Styles/separator.css";
+import Loader from "../../Loader/Loader";
 
 export function Top_bar_of_popup({ values, setters, action }) {
     const [separatorLeft, setSeparatorLeft] = useState(0);
     const [separatortop, setSeparatorTop] = useState(0);
     const [activeSeparatorIdx, setActiveSeparatorIdx] = useState(null);
+    const [loading_02, setLoading_02] = useState(false);
 
     const {
         forward_Btn,
@@ -19,7 +21,8 @@ export function Top_bar_of_popup({ values, setters, action }) {
         isPathNavigationDivDisable,
         separatorVisibility,
         ffName,
-        currentDir
+        currentDir,
+        validateSeparatorPath
     } = values;
 
     const {
@@ -88,7 +91,7 @@ export function Top_bar_of_popup({ values, setters, action }) {
                                         style={{ "cursor": "pointer", "textWrapMode": "nowrap" }}>
                                         {path}
                                     </span>
-                                    {showSeprator && <span onClick={(event) => handleBreadCrumbSeparatorClick(event, setSeparatorTop, setSeparatorLeft, setSeparatorVisibility, idx, separatorVisibility, activeSeparatorIdx, setActiveSeparatorIdx, sliptPaths)}
+                                    {showSeprator && <span onClick={(event) => handleBreadCrumbSeparatorClick(event, setSeparatorTop, setSeparatorLeft, setSeparatorVisibility, idx, separatorVisibility, activeSeparatorIdx, setActiveSeparatorIdx, sliptPaths, validateSeparatorPath, currentDir, setLoading_02)}
                                         style={{
                                             "cursor": "pointer",
                                         }}>{">"}</span>}
@@ -99,23 +102,26 @@ export function Top_bar_of_popup({ values, setters, action }) {
                 </div>
             </div>
             <div className="separator_div" style={{
-                "display": separatorVisibility ? "block" : "none",
-                "left": `${separatorLeft}px`, "top": `${separatortop}px`
+                "display": loading_02 ? "flex" : separatorVisibility ? "block" : "none",
+                "left": `${separatorLeft}px`, "top": `${separatortop}px`,
+                "justifyContent": loading_02 ? "center" : "normal",
+                "alignItems": loading_02 ? "center" : "normal"
             }}>
-                <ul className="separator_ul">
-                    {
-                        files.map((file, idx) => {
-                            {
-                                if (file.type === "directory") {
-                                    return (
-                                        <li onClick={() => console.log(file.name, "|", ffName
-                                            , "|", currentDir)} className="separator_li" key={idx}>{file.name}</li>
-                                    )
+                {loading_02 ? <Loader H={25} W={25} /> :
+                    <ul className="separator_ul">
+                        {
+                            files.map((file, idx) => {
+                                {
+                                    if (file.type === "directory") {
+                                        return (
+                                            <li onClick={() => handleSeparatorPath(validateSeparatorPath, currentDir + "/" + file.name, setLoading_02, setSeparatorVisibility)} className="separator_li" key={idx}>{file.name}</li>
+                                        )
+                                    }
                                 }
-                            }
-                        })
-                    }
-                </ul>
+                            })
+                        }
+                    </ul>
+                }
             </div>
         </>
     )

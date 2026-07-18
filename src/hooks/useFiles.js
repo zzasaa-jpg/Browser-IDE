@@ -74,6 +74,27 @@ export function useFiles() {
     }
   };
 
+  const validateSeparatorPath = async (path, option = {}) => {
+    const { useHookLoader = true, middle_div_popup_loader = true } = option;
+    if (useHookLoader) setLoading(true);
+    setError(null);
+    try {
+      const result = await ServerProvider.read_Directories(path);
+      if (!result.success) {
+        setError(result.message);
+        return false;
+      }
+      console.log(result);
+      setNewState(result);
+      return { "success": true, "tree": result.tree };
+    } catch (err) {
+      setError(err.message || "Something went wrong.");
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return {
     files,
     currentDir,
@@ -94,5 +115,6 @@ export function useFiles() {
     reset,
     setLoading,
     setError,
+    validateSeparatorPath
   };
 }

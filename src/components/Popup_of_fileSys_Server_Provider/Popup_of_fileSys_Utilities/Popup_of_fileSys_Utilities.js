@@ -83,17 +83,31 @@ export function ResetStates_of_popup(setSelectType, setIsSelectBtnDisable, setIs
     reset();
 }
 
-export function handleBreadCrumbSeparatorClick(event, setSeparatorTop, setSeparatorLeft, setSeparatorVisibility, idx, separatorVisibility, activeSeparatorIdx, setActiveSeparatorIdx, sliptPaths) {
+export function handleBreadCrumbSeparatorClick(event, setSeparatorTop, setSeparatorLeft, setSeparatorVisibility, idx, separatorVisibility, activeSeparatorIdx, setActiveSeparatorIdx, sliptPaths, validateSeparatorPath, currentDir, setLoading_02) {
     const separator_path = sliptPaths.slice(0, idx + 1).join("/");
+    handleSeparatorPath(validateSeparatorPath, separator_path, setLoading_02);
 
     // Same separator clicked -> Toggle
-    if(activeSeparatorIdx === idx) setSeparatorVisibility(prev => !prev);
+    if (activeSeparatorIdx === idx) setSeparatorVisibility(prev => !prev);
     else {
-    // Different separator clicked -> Show it
+        // Different separator clicked -> Show it
         setSeparatorVisibility(true);
         setActiveSeparatorIdx(idx);
     }
 
     setSeparatorTop(event.clientY + 17);
     setSeparatorLeft(event.clientX + 6);
+}
+
+export async function handleSeparatorPath(validateSeparatorPath, separator_path_fetch, setLoading_02, setSeparatorVisibility) {
+    setLoading_02(true);
+    const { success, tree } = await validateSeparatorPath(separator_path_fetch, { useHookLoader: false });
+    if (success) {
+        setLoading_02(false);
+        setSeparatorVisibility(false);
+        console.log(success)
+        console.log(tree);
+    } else {
+        setLoading_02(false);
+    }
 }

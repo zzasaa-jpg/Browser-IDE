@@ -25,6 +25,7 @@ export default function FileManager() {
     reset,
     setLoading,
     setError,
+    validateSeparatorPath
   } = useFiles([]);
 
   return (
@@ -46,6 +47,7 @@ export default function FileManager() {
             loading={loading}
             setLoading={setLoading}
             setError={setError}
+            validateSeparatorPath={validateSeparatorPath}
           /> :
           <div className="IDE_Parent_div">
             <div className="class_06">
